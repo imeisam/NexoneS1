@@ -1,0 +1,337 @@
+@font-face {
+  font-family: AkrobatBlack;
+  src: url('../fonts/Akrobat-Black.ttf');
+}
+
+@font-face {
+  font-family: AkrobatBold;
+  src: url('../fonts/Akrobat-Bold.ttf');
+}
+
+@font-face {
+  font-family: AkrobatExtraBold;
+  src: url('../fonts/Akrobat-ExtraBold.ttf');
+}
+
+
+@font-face {
+  font-family: AkrobatLight;
+  src: url('../fonts/Akrobat-Light.ttf');
+}
+
+@font-face {
+  font-family: AkrobatExtraLight;
+  src: url('../fonts/Akrobat-ExtraLight.ttf');
+}
+
+
+@font-face {
+  font-family: AkrobatRegular;
+  src: url('../fonts/Akrobat-Regular.ttf');
+}
+
+
+@font-face {
+  font-family: AkrobatSemiBold;
+  src: url('../fonts/Akrobat-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: AkrobatThin;
+  src: url('../fonts/Akrobat-Thin.ttf');
+}
+
+
+* {
+  top: 0px;
+  left: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  overflow: hidden;
+  display: none;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.box{
+  width: 30rem;
+  height: 36rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background-color: rgba(23 ,26, 33,0.9);
+  z-index: 2;
+  border-radius: 1rem;
+}
+
+
+.header{
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: AkrobatBold;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+  display: flex;
+  text-shadow: 0px 0px 10px rgba(235, 235, 235, 0.6);
+}
+
+.alt{
+  color: rgb(148, 151, 151);
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: AkrobatBold;
+  margin-left: 1.55rem;
+  margin-top: -0.05rem;
+  display: flex;
+}
+
+.total-box{
+  background-color: rgb(67, 77, 61);
+  width: 6rem;
+  height: 1.2rem;
+  margin-left: 9.4rem;
+  margin-top: -2rem;
+}
+
+.total-text{
+  color: rgb(255, 254, 254,0.6);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: AkrobatBold;
+  margin-left: 9.75rem;
+  margin-top: -0.95rem;
+  display: flex;
+}
+
+
+.total-mini-box{
+  background-color: rgb(87 ,105 ,69);
+  width: 1.5rem;
+  height: 1.2rem;
+  margin-left: 13.9rem;
+  display: flex;
+  margin-top: -1.2rem;
+}
+
+.total-count{
+  color: rgb(137 168 99);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: AkrobatBold;
+  margin-left: 14.5rem;
+  margin-top: -0.75rem;
+}
+
+.exit{
+  border-left: 1px solid rgb(255, 254, 254,0.1);
+  border-top: 1px solid rgb(255, 254, 254,0.1);
+  border-bottom: 1px solid rgb(255, 254, 254,0.1);
+  padding: 0.03rem 0.6rem;
+  font-size: 0.8rem;
+  color: rgb(255, 254, 254,0.4); 
+  margin-left: 23.47rem;
+  position: absolute;
+  margin-top: 1.45rem;
+  font-family: AkrobatLight;
+  transition-property: 0.5s;
+}
+
+.online{
+  padding: 0.4rem;
+  background-color: rgba(242, 10, 10, 0.1);
+  position: absolute;
+  top: 5rem;
+  left: 1.5rem;
+  border: 1px solid rgb(117, 42, 42);
+  border-radius: 0.1rem;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-family: AkrobatBold;
+  text-shadow: 0px 0px 10px rgb(189, 189, 189);
+  font-size: 0.6rem;
+  width: 7.5rem;
+  cursor: pointer;
+}
+.warns{
+  padding:  0.4rem;
+  background-color: rgba(242, 10, 10, 0.1);
+  position: absolute;
+  top: 5rem;
+  left: 10rem;
+  text-align: center;
+  border: 1px solid rgb(117, 42, 42);
+  border-radius: 0.1rem;
+  color: rgb(255, 255, 255);
+  font-family: AkrobatBold;
+  text-shadow: 0px 0px 10px rgb(189, 189, 189);
+  font-size: 0.6rem;
+  width: 8.5rem;
+  cursor: pointer;
+}
+.bans{
+  padding: 0.4rem ;
+  background-color: rgba(242, 10, 10, 0.1);
+  position: absolute;
+  top: 5rem;
+  text-align: center;
+  left: 19.5rem;
+  border: 1px solid rgb(117, 42, 42);
+  border-radius: 0.1rem;
+  color: rgb(255, 255, 255);
+  font-family: AkrobatBold;
+  text-shadow: 0px 0px 10px rgb(189, 189, 189);
+  font-size: 0.6rem;
+ width: 7.5rem;
+ cursor: pointer;
+}
+
+.bans:hover ,.warns:hover, .online:hover{
+  background-color: rgba(4, 87, 83, 0.1) !important;
+  color: rgb(255, 255, 255);
+
+}
+.online-list{
+  width: 27rem;
+  height: 27rem;
+  left: 1.5rem;
+  top: 7rem;
+  position: absolute;
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(255, 255, 255,0.5);
+  box-shadow: 0px 0px 3px rgb(255, 255, 255,0.5);
+}
+
+.online-box{
+  width: 26.7rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.1rem;
+  position: relative;
+}
+
+.online-box .left-box{
+  margin-left: 0rem;
+  width:1.5rem;
+  height: 2rem;
+  align-items: center;
+  text-align: center ;
+  justify-content: center;
+  border-radius: 0.1rem;
+  color: white;
+  font-size: 12px;
+  background-color: rgba(242, 10, 10, 0.1);
+  border: 1.5px solid rgb(117, 42, 42);
+  font-family: AkrobatBold;
+  display: flex;
+}
+
+.fa-user{
+  color: rgb(66, 201, 176);
+  font-size: 1rem;
+  margin-left: 0.65rem;
+  text-shadow: 0px 0px 10px rgba(66, 201, 176);
+}
+
+.online-box .right-box{
+  margin-left: 2.1rem;
+  top: 0.2rem;
+  position: absolute;
+  width: 24.25rem;
+  height: 2.15rem;
+  opacity: 1;
+  border-radius: 0.1rem;
+  overflow-x: auto;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0.24%, rgba(255, 255, 255, 0.08) 51.07%, rgba(255, 255, 255, 0.05) 99.82%);
+}
+.pointer{
+  cursor: pointer;
+}
+.online-box .right-box .name{
+  color: rgb(28 2,13 1);
+  font-size: 1.0rem;
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+  font-family: AkrobatBold;
+  margin-left: 0.8rem;
+  margin-top: 0.5rem;
+  display: flex;
+}
+
+.online-box .right-box .baction1{
+  padding: 0.1rem 0.1rem;    
+  color: rgb(213, 28, 28);  
+  position: absolute;
+  text-transform: uppercase;
+  font-family: AkrobatBold;
+  margin-left: 22.0rem;
+ cursor: pointer; 
+ display: flex;
+}
+.online-box .right-box .baction1:hover{
+  color: rgb(16, 136, 106);
+}
+.online-box .right-box .baction1 span{
+  padding: 0.3rem 0.3rem;  
+}
+
+.online-box .right-box .baction2{
+  padding: 0.1rem 0.1rem;    
+  color: rgb(213, 133, 28);  
+  position: absolute;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: AkrobatBold;
+  margin-left: 20.5rem;
+ cursor: pointer; 
+ display: flex;
+}
+
+.online-box .right-box .baction2 span:hover{
+  color: rgb(16, 136, 106);
+}
+.online-box .right-box .baction2 span{
+  padding: 0.3rem 0.3rem;  
+}
+
+
+.online-box .right-box .baction3{
+  padding: 0.1rem 0.1rem;    
+  color: rgb(214, 214, 214);  
+  position: absolute;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: AkrobatBold;
+  margin-left: 19.0rem;
+ cursor: pointer; 
+ display: flex;
+}
+
+.online-box .right-box .baction3 span:hover{
+  color: rgb(16, 136, 106);
+}
+.online-box .right-box .baction3 span{
+  padding: 0.3rem 0.3rem;  
+}

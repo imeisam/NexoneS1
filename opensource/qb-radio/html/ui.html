@@ -1,0 +1,31 @@
+<!doctype HTML>
+<html>
+<head>
+  <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome 5 -->
+</head>
+<body>
+    <div class="container">
+        <div class="radio-container">
+            <img id="bg" src="./img/radiooff.png" alt="" class="radio">
+
+            <div class="channel">
+                <input id="channel" hidden="true" type="number" name="channel" min="1" max="500" placeholder="000.0">
+            
+            </div>
+            <div id="mhz" class="mhz">MHZ</div>
+            <div id="submit"  hidden="true"></div>
+            <div id="disconnect"  hidden="true"></div>
+            <!-- plus Button -->
+            <button  id="volumeUp" class="button1"><i class="fas fa-plus"></i></button>
+            <!-- Minus Button -->
+            <button id="volumeDown" class="button2 disabled" ><i class="fas fa-minus"></i></button>
+            <button id="increaseradiochannel" ></button>
+            <button id="decreaseradiochannel" ></button>
+            <div id="poweredOff" class="power-button off" >OFF</div>
+        </div>
+    </div>
+    <script src="js/script.js" type="text/javascript"></script>
+</body>
+</html>

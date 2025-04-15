@@ -1,0 +1,8 @@
+resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
+fx_version 'cerulean'
+game 'gta5'
+this_is_a_map 'yes'
+file 'stream/t8n-squid1base.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/t8n-squid1base.ytyp'
+-- file 'stream/t8n-squidlobby.ytyp'
+-- data_file 'DLC_ITYP_REQUEST' 'stream/t8n-squidlobby.ytyp'

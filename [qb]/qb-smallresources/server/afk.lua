@@ -1,0 +1,89 @@
+-- local QBCore = exports['qb-core']:GetCoreObject()
+-- -- class
+-- local blockjob={
+--     ['police']=true,
+--     ['ambulance']=true,
+--     ['justice']=true,
+--     ['goverment']=true,
+-- }
+-- Player = {
+--     data = {}
+-- }
+-- function Player:add(o)
+--     if not self.data[o.citizenid]  then
+--         self.data[o.citizenid] = {
+--             source = o.source,
+--             afk_timer = afk.settings.kick_timer,
+--             prev_position = o.pos,
+--         }
+--     else
+--         Player:update_position(o.source, o.citizenid)
+--     end
+-- end
+-- function Player:remove(citizenid)
+--     self.data[citizenid] = nil
+-- end
+-- function Player:checkForKick(citizenid)
+--     if (self.data[citizenid].afk_timer == 0) then
+--         local pl=QBCore.Functions.GetPlayerByCitizenId(citizenid)
+--         pl.Functions.SetJobDuty(false)
+--         -- DropPlayer(self.data[citizenid].source, 'You Have Been Kicked For Being AFK')
+--         self.data[citizenid].afk_timer=0
+--         TriggerClientEvent('QBCore:Notify', self.data[citizenid].source, "You Are Off Duty Now..!!!", "error")
+--     end
+-- end
+-- function Player:afk_notification(citizenid)
+--     for _, time in pairs(afk.settings.notifications) do
+--         local pl=QBCore.Functions.GetPlayerByCitizenId(citizenid)
+--         if self.data[citizenid].afk_timer == time and  pl.PlayerData.job.onduty then
+--             local msg = ''
+--             if time < 60 then
+--                 msg = 'You are AFK and will be Offduty in ' .. time .. ' seconds!'
+--             else
+--                 msg = 'You are AFK and will be Offduty in ' .. math.ceil(time / 60) .. ' minutes!'
+--             end
+--             TriggerClientEvent('QBCore:Notify', self.data[citizenid].source, msg, "error")
+--             return true
+--         end
+--     end
+--     return false
+-- end
+-- function Player:update_position(source, citizenid)
+--     local pl=QBCore.Functions.GetPlayerByCitizenId(citizenid)
+--     if not blockjob[pl.PlayerData.job.name] then
+--         local current_coord = GetEntityCoords(GetPlayerPed(source))
+--         if current_coord == self.data[citizenid].prev_position  then
+--             self.data[citizenid].afk_timer = self.data[citizenid].afk_timer - afk.settings.update_interval
+--             if self.data[citizenid].afk_timer <= 0 then
+--                 self.data[citizenid].afk_timer = 0
+--             end
+--         else
+--             self.data[citizenid].prev_position = current_coord
+--             self.data[citizenid].afk_timer = afk.settings.kick_timer
+--         end
+--         self:afk_notification(citizenid)
+--         self:checkForKick(citizenid)
+--     end
+-- end
+-- function Player:afkThread()
+--     CreateThread(function()
+--         while true do
+--             local players = QBCore.Functions.GetPlayers()
+--             for _, player in pairs(players) do
+--                 local qb_player = QBCore.Functions.GetPlayer(player)
+--                 self:add({
+--                     citizenid = qb_player.PlayerData.citizenid,
+--                     source = player,
+--                     pos = GetEntityCoords(GetPlayerPed(player))
+--                 })
+--             end
+--             Wait(afk.settings.update_interval * 1000)
+--         end
+--     end)
+-- end
+-- AddEventHandler('onResourceStart', function(resourceName)
+--     if (GetCurrentResourceName() ~= resourceName) then
+--         return
+--     end
+--     Player:afkThread()
+-- end)

@@ -1,0 +1,42 @@
+$(document).on('keydown', function() {
+    switch(event.keyCode) {
+        case 27: // ESC
+            Notepad.Close();
+            break;
+    }
+});
+
+$(document).on('click', '#drop', function(){
+    Notepad.Close();
+    $.post("http://qb-notes/DropNote", JSON.stringify({
+        text: $("#notetext").val(),
+    }));
+});
+
+(() => {
+    Notepad = {};
+
+    Notepad.Open = function(data) {
+        $(".notepad-container").css("display", "block");
+        if (data.text != null) {
+            $("#notetext").val(data.text);
+        }
+    };
+
+    Notepad.Close = function() {
+        $(".notepad-container").css("display", "none");
+        $.post("http://qb-notes/CloseNotepad", JSON.stringify({
+        }));
+    };
+
+    window.onload = function(e) {
+        window.addEventListener('message', function(event) {
+            switch(event.data.action) {
+                case "open":
+                    Notepad.Open(event.data);
+                    break;
+            }
+        })
+    }
+
+})();

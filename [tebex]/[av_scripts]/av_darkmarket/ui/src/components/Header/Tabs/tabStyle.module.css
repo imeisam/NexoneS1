@@ -1,0 +1,46 @@
+.tab {
+  background: linear-gradient(
+    90deg,
+    rgba(129, 131, 138, 0.15) 0%,
+    rgba(63, 65, 74, 0.25) 100%
+  );
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.activeTab {
+  background: radial-gradient(
+    circle,
+    rgba(129, 131, 138, 0.55) 0%,
+    rgba(63, 65, 74, 0.8) 90%
+  );
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.tab:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(208, 211, 221, 0.15) 0%,
+    rgba(139, 144, 165, 0.25) 100%
+  );
+  cursor: pointer;
+}
+
+.input {
+  background-color: rgba(25, 25, 25, 0.25);
+}
+
+.input:focus {
+  border: solid 1px rgba(255, 255, 255, 0.1);
+}

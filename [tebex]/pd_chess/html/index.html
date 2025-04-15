@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Two-player chess in javascript">
+    <meta name="keywords" content="multiplayer chess,chess,javascript">
+    <meta name="author" content="github @jinpa-t">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Player Chess</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/ea573b0d28.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  </head>
+  <body>
+    <main>
+      <div class="timeChoice" id="timeChoice">
+        <div id="timeChoice-textbox" class="timeChoice-textbox">Select time control</div>
+        <div class="button-row">
+          <span class="timeChoice-button" id="choice1">5 mins</span>
+          <span class="timeChoice-button" id="choice2">10 mins</span>
+        </div>
+        <div class="button-row">
+          <span class="timeChoice-button" id="choice3">15 mins</span>
+          <span class="timeChoice-button" id="choice4">20 mins</span>
+        </div>
+      </div>
+      <div id="outer-wrapper" class="outer-wrapper">
+        <div id="ui-box" class="ui-box">
+          <div class="time-box-container">
+            <div class="time-box" id="time-box-right">
+              <div class="time">
+                <i class="fas fa-clock"></i>
+                <span class="upperclock"><span id="min1">06</span>:<span id="sec1">00</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="elo-display" id="elo-display-top">
+            <i class="fas fa-bars" id="bars"></i>
+            <span id="player-text-right" class="player-text">Opponent</span>
+            <span class="elo-text" id="elo_opponent">1000</span>
+            <span id="opponent_elo_delta" class="elo-delta">+11</span>
+          </div>
+          <div class="red-bar"></div>
+          <div class="game-message">
+              <span id="game-message-text" class="game-message-text">YOUR TURN</span>
+          </div>
+          <div id="choiceBar" class="choiceBar">
+            <span class="choices" id="choiceYes"><i class="fa-solid fa-check"></i></span>
+            <span id="drawOfferText">Draw offer</span>
+            <span class="choices" id="choiceNo"><i class="fa-solid fa-x"></i></span>
+          </div>
+          <div class="green-bar"></div>
+          <div class="elo-display" id="elo-display-bottom">
+            <span id="player-text-left" class="player-text">You</span>
+            <span class="elo-text" id="elo_self">1000</span>
+            <span id="self_elo_delta" class="elo-delta">+11</span>
+            <span class="flag-container">
+              
+              <i id="flag" class="fas fa-flag"></i>
+              <i id="cross" class="fas fa-x"></i>
+
+            </span>
+            <div id="drawbutton">½</div>
+          </div>
+          <div class="time-box-container">
+            <div class="time-box" id="time-box-left">
+              <div class="time2">
+                <i id="bottom-clock" class="fas fa-clock"></i>
+                <span id="min2">06</span>:<span id="sec2">00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div id="outerboard">
+        <div class="chessboard" id="chessboard">
+            <div class="row8">
+                <div class="box white" id="a8" onclick="movePiece(this)"><a id="bRw" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9814</div></a></div>
+                <div class="box black" id="b8" onclick="movePiece(this)"><a id="bKb" class="black-piece" onclick="moveBlack(this)"  ><div class="pieceClick">&#9816</div></a></div>
+                <div class="box white" id="c8" onclick="movePiece(this)"><a id="bBw" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9815</div></a></div>
+                <div class="box black" id="d8" onclick="movePiece(this)"><a id="bQ" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick"> &#9813</div></a></div>
+                <div class="box white" id="e8" onclick="movePiece(this)"><a id="bK" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick"> &#9812</div></a></div>
+                <div class="box black" id="f8" onclick="movePiece(this)"><a id="bBb" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9815</div></a></div>
+                <div class="box white" id="g8" onclick="movePiece(this)"><a id="bKw" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9816</div></a></div>
+                <div class="box black" id="h8" onclick="movePiece(this)"><a id="bRb" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9814</div></a></div>
+            </div>
+            <div class="row7">
+                <div class="box black" id="a7" onclick="movePiece(this)"><a id="bP1" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9823</div></a></div>
+                <div class="box white" id="b7" onclick="movePiece(this)"><a id="bP2" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9823</div></a></div>
+                <div class="box black" id="c7" onclick="movePiece(this)"><a id="bP3" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9823</div></a></div>
+                <div class="box white" id="d7" onclick="movePiece(this)"><a id="bP4" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9823</div></a></div>
+                <div class="box black" id="e7" onclick="movePiece(this)"><a id="bP5" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9823</div></a></div>
+                <div class="box white" id="f7" onclick="movePiece(this)"><a id="bP6" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9823</div></a></div>
+                <div class="box black" id="g7" onclick="movePiece(this)"><a id="bP7" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9823</div></a></div>
+                <div class="box white" id="h7" onclick="movePiece(this)"><a id="bP8" class="black-piece" onclick="moveBlack(this)"><div class="pieceClick">&#9823</div></a></div>
+            </div>
+            <div class="row6">
+                <div class="box white" id="a6" onclick="movePiece(this)"></div>
+                <div class="box black" id="b6" onclick="movePiece(this)"></div>
+                <div class="box white" id="c6" onclick="movePiece(this)"></div>
+                <div class="box black" id="d6" onclick="movePiece(this)"></div>
+                <div class="box white" id="e6" onclick="movePiece(this)"></div>
+                <div class="box black" id="f6" onclick="movePiece(this)"></div>
+                <div class="box white" id="g6" onclick="movePiece(this)"></div>
+                <div class="box black" id="h6" onclick="movePiece(this)"></div>
+            </div>
+            <div class="row5">
+                <div class="box black" id="a5" onclick="movePiece(this)"></div>
+                <div class="box white" id="b5" onclick="movePiece(this)"></div>
+                <div class="box black" id="c5" onclick="movePiece(this)"></div>
+                <div class="box white" id="d5" onclick="movePiece(this)"></div>
+                <div class="box black" id="e5" onclick="movePiece(this)"></div>
+                <div class="box white" id="f5" onclick="movePiece(this)"></div>
+                <div class="box black" id="g5" onclick="movePiece(this)"></div>
+                <div class="box white" id="h5" onclick="movePiece(this)"></div>
+            </div>
+            <div class="row4">
+                <div class="box white" id="a4" onclick="movePiece(this)"></div>
+                <div class="box black" id="b4" onclick="movePiece(this)"></div>
+                <div class="box white" id="c4" onclick="movePiece(this)"></div>
+                <div class="box black" id="d4" onclick="movePiece(this)"></div>
+                <div class="box white" id="e4" onclick="movePiece(this)"></div>
+                <div class="box black" id="f4" onclick="movePiece(this)"></div>
+                <div class="box white" id="g4" onclick="movePiece(this)"></div>
+                <div class="box black" id="h4" onclick="movePiece(this)"></div>
+            </div>
+            <div class="row3">
+                <div class="box black" id="a3" onclick="movePiece(this)"></div>
+                <div class="box white" id="b3" onclick="movePiece(this)"></div>
+                <div class="box black" id="c3" onclick="movePiece(this)"></div>
+                <div class="box white" id="d3" onclick="movePiece(this)"></div>
+                <div class="box black" id="e3" onclick="movePiece(this)"></div>
+                <div class="box white" id="f3" onclick="movePiece(this)"></div>
+                <div class="box black" id="g3" onclick="movePiece(this)"></div>
+                <div class="box white" id="h3" onclick="movePiece(this)"></div>
+            </div>
+            <div class="row2">
+                <div class="box white" id="a2" onclick="movePiece(this)"><a id="wP1" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9817</div></a></div>
+                <div class="box black" id="b2" onclick="movePiece(this)"><a id="wP2" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9817</div></a></div>
+                <div class="box white" id="c2" onclick="movePiece(this)"><a id="wP3" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9817</div></a></div>
+                <div class="box black" id="d2" onclick="movePiece(this)"><a id="wP4" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9817</div></a></div>
+                <div class="box white" id="e2" onclick="movePiece(this)"><a id="wP5" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9817</div></a></div>
+                <div class="box black" id="f2" onclick="movePiece(this)"><a id="wP6" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9817</div></a></div>
+                <div class="box white" id="g2" onclick="movePiece(this)"><a id="wP7" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9817</div></a></div>
+                <div class="box black" id="h2" onclick="movePiece(this)"><a id="wP8" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9817</div></a></div>
+            </div>
+            <div class="row1">
+                <div class="box black" id="a1" onclick="movePiece(this)"><a id="wRb" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9814</div></a></div>
+                <div class="box white" id="b1" onclick="movePiece(this)"><a id="wKw" class="white-piece" onclick="moveWhite(this)" >  <div class="pieceClick">&#9816</div></a></div>
+                <div class="box black" id="c1" onclick="movePiece(this)"><a id="wBb" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9815</div></a></div>
+                <div class="box white" id="d1" onclick="movePiece(this)"><a id="wQ" class="white-piece" onclick="moveWhite(this)"  >  <div class="pieceClick">&#9813</div></a></div>
+                <div class="box black" id="e1" onclick="movePiece(this)"><a id="wK" class="white-piece" onclick="moveWhite(this)"  >  <div class="pieceClick">&#9812</div></a></div>
+                <div class="box white" id="f1" onclick="movePiece(this)"><a id="wBw" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9815</div></a></div>
+                <div class="box black" id="g1" onclick="movePiece(this)"><a id="wKb" class="white-piece" onclick="moveWhite(this)"  > <div class="pieceClick">&#9816</div></a></div>
+                <div class="box white" id="h1" onclick="movePiece(this)"><a id="wRw" class="white-piece" onclick="moveWhite(this)">  <div class="pieceClick">&#9814</div></a></div>
+            </div>  
+        </div>
+    </div>
+    <div id="prompt">
+        <div id="blackChoice">
+            <div class="choiceItem"><a class="black-piece" id="b_R" onclick="promotePawn(this)">&#9820</a></div>
+            <div class="choiceItem"><a class="black-piece" id="b_K" onclick="promotePawn(this)">&#9822</a></div>
+            <div class="choiceItem"><a class="black-piece" id="b_B" onclick="promotePawn(this)">&#9821</a></div>
+            <div class="choiceItem"><a class="black-piece" id="b_Q" onclick="promotePawn(this)"> &#9819</a></div>
+        </div>
+        <div id="whiteChoice">
+            <div class="choiceItem"><a class="white-piece" id="w_R" onclick="promotePawn(this)">&#9814</a></div>
+            <div class="choiceItem"><a class="white-piece" id="w_K" onclick="promotePawn(this)">&#9816</a></div>
+            <div class="choiceItem"><a class="white-piece" id="w_B" onclick="promotePawn(this)">&#9815</a></div>
+            <div class="choiceItem"><a class="white-piece" id="w_Q" onclick="promotePawn(this)">&#9813</a></div>
+        </div>
+    </div>
+    <div>
+      <button id="restart">Restart</button>
+  </div>
+     <div id="turns">
+        <label id="label">Current Turn:</label>
+        <span id="black-turn">Black</span>
+        <span id="white-turn">White</span>
+    </div>
+    <div id="outHolder">
+        <div id="blackTaken">
+            
+        </div>
+        <div id="whiteTaken">
+            <a class="white-piece" onclick="moveWhite(this)">&#9816</a>
+        </div>
+    </div>
+   
+
+    
+      
+    <div class="move-wrapper">
+        <table>
+            <thead>
+                <th>White moves</th>
+                <th>Black moves</th>
+            </thead>
+            <tbody id="move-history">
+            </tbody>
+        </table>        
+        <template id="move-template">
+            <tr class="move">
+                <td></td>
+                <td></td>
+            </tr>
+        </template>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

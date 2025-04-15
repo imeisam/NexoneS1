@@ -1,0 +1,328 @@
+{
+  "locale": "en_US",
+  "dateFormat": "dd-MM-yyyy HH:mm:ss",
+  "inventory": "nui://qb-inventory/html/images/",
+
+  "dashboard": {},
+
+  "citizens": {
+    "no_image": "https://snworksceo.imgix.net/dtc/3f037af6-87ce-4a37-bb37-55b48029727d.sized-1000x1000.jpg?w=1000",
+    "show_identity": true,
+    "show_licences": true,
+    "show_tags": true,
+    "show_vehicles": true,
+    "show_housing": true,
+    "show_employment": false,
+    "show_weapons": true,
+    "show_incidents": true,
+    "show_reports": true,
+    "show_gallery": true,
+    "tags": [
+      {"key": 0, "label": "Informer", "type": "success"},
+      {"key": 1, "label": "Dangerous", "type": "warning"},
+      {"key": 2, "label": "Wanted", "type": "error"},
+      {"key": 3, "label": "Weirdo", "type": "info"}
+    ]
+  },
+
+  "incidents": {
+    "show_location": true,
+    "show_officers": true,
+    "show_citizens": true,
+    "show_incidents": true,
+    "show_reports": true,
+    "show_evidence": true,
+    "show_vehicles": true,
+    "show_tags": true,
+    "show_gallery": true,
+    "fine_reduction": true,
+    "jail_reduction": true,
+    "points_reduction": false,
+    "reductions": [0, 10, 25, 50, 75, 90, 100]
+  },
+
+  "reports": {
+    "show_location": true,
+    "show_officers": true,
+    "show_citizens": true,
+    "show_incidents": true,
+    "show_reports": true,
+    "show_evidence": true,
+    "show_vehicles": true,
+    "show_tags": true,
+    "show_gallery": true
+  },
+
+  "bolos": {
+    "no_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Nissan_Skyline_R34_GT-R_N%C3%BCr_001.jpg/640px-Nissan_Skyline_R34_GT-R_N%C3%BCr_001.jpg",
+    "tags": [
+      {"value": 0, "label": "Informer", "type": "success"},
+      {"value": 1, "label": "Dangerous", "type": "warning"},
+      {"value": 2, "label": "Wanted", "type": "error"},
+      {"value": 3, "label": "Weirdo", "type": "info"}
+    ]
+  },
+
+  "warrants": {
+    "no_image": "https://snworksceo.imgix.net/dtc/3f037af6-87ce-4a37-bb37-55b48029727d.sized-1000x1000.jpg?w=1000",
+    "tags": [
+      {"value": 0, "label": "Informer", "type": "success"},
+      {"value": 1, "label": "Dangerous", "type": "warning"},
+      {"value": 2, "label": "Wanted", "type": "error"},
+      {"value": 3, "label": "Weirdo", "type": "info"}
+    ]
+  },
+
+  "vehicles": {
+    "no_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Nissan_Skyline_R34_GT-R_N%C3%BCr_001.jpg/640px-Nissan_Skyline_R34_GT-R_N%C3%BCr_001.jpg",
+    "show_information": true,
+    "show_tags": true,
+    "show_gallery": true,
+    "show_incidents": true,
+    "show_reports": true,
+    "show_evidence": true,
+    "tags": [
+      {"key": 0, "label": "Informer", "type": "success"},
+      {"key": 1, "label": "Dangerous", "type": "warning"},
+      {"key": 2, "label": "Wanted", "type": "error"},
+      {"key": 3, "label": "Weirdo", "type": "info"}
+    ]
+  },
+
+  "evidence": {
+    "show_items": true,
+    "show_officers": true,
+    "show_citizens": true,
+    "show_incidents": true,
+    "show_reports": true,
+    "show_evidence": true,
+    "show_tags": true,
+    "show_gallery": true,
+    "categories": [
+      {"value": 0, "label": "Other"},
+      {"value": 1, "label": "Blood"},
+      {"value": 2, "label": "Casing"},
+      {"value": 3, "label": "Weapon"},
+      {"value": 4, "label": "Projectile"},
+      {"value": 5, "label": "Glass"},
+      {"value": 6, "label": "Vehicle Fragment"},
+      {"value": 7, "label": "Photo"},
+      {"value": 8, "label": "Strain"}
+    ]
+  },
+
+  "legislations": {
+    "categories": [
+      {"value": 0, "label": "Economic Policy"},
+      {"value": 1, "label": "Education"},
+      {"value": 2, "label": "Environment"},
+      {"value": 3, "label": "Foreign Policy"},
+      {"value": 4, "label": "Healthcare"},
+      {"value": 5, "label": "Immigration"},
+      {"value": 6, "label": "Labor & Employment"},
+      {"value": 7, "label": "Law & Justice"},
+      {"value": 8, "label": "National Security"},
+      {"value": 9, "label": "Public Health"},
+      {"value": 10, "label": "Social Policy"},
+      {"value": 11, "label": "Taxation"},
+      {"value": 12, "label": "Technology & Communications"},
+      {"value": 13, "label": "Transportation"},
+      {"value": 14, "label": "Veterans' Affairs"},
+      {"value": 15, "label": "Agriculture"},
+      {"value": 16, "label": "Housing & Urban Development"},
+      {"value": 17, "label": "Energy Policy"},
+      {"value": 18, "label": "Civil Rights"},
+      {"value": 19, "label": "Defense"}
+    ]
+  },
+
+  "weapon_registry": {
+    "show_evidence": true,
+    "show_tags": true,
+    "no_image": "https://snworksceo.imgix.net/dtc/3f037af6-87ce-4a37-bb37-55b48029727d.sized-1000x1000.jpg?w=1000"
+  },
+
+  "staff": {
+    "no_image": "https://snworksceo.imgix.net/dtc/3f037af6-87ce-4a37-bb37-55b48029727d.sized-1000x1000.jpg?w=1000",
+    "departments": [
+      {
+        "value": 0,
+        "label": "LSPD",
+        "job": "police",
+        "emblem": "lspd.webp",
+        "ranks": [
+          {"value": 0, "label": "Police Officer I", "insignia": "lspd/officer_2.webp", "grade": 0},
+          {"value": 1, "label": "Police Officer II", "insignia": "lspd/officer_2.webp", "grade": 1},
+          {"value": 2, "label": "Police Officer III", "insignia": "lspd/officer_3.webp", "grade": 2},
+          {"value": 3, "label": "Police Officer III+1", "insignia": "lspd/officer_3+1.webp", "grade": 3},
+          {"value": 4, "label": "Detective I", "insignia": "lspd/detective_1.webp", "grade": 4},
+          {"value": 5, "label": "Detective II", "insignia": "lspd/detective_2.webp", "grade": 5},
+          {"value": 6, "label": "Detective III", "insignia": "lspd/detective_3.webp", "grade": 6},
+          {"value": 7, "label": "Sergeant I", "insignia": "lspd/sergeant_1.webp", "grade": 7},
+          {"value": 8, "label": "Sergeant II", "insignia": "lspd/sergeant_2.webp", "grade": 8},
+          {"value": 9, "label": "Lieutenant I", "insignia": "lspd/lieutenant.webp", "grade": 9},
+          {"value": 9, "label": "Lieutenant II", "insignia": "lspd/lieutenant.webp", "grade": 9},
+          {"value": 10, "label": "Captain I", "insignia": "lspd/captain.webp", "grade": 10},
+          {"value": 11, "label": "Captain II", "insignia": "lspd/captain.webp", "grade": 11},
+          {"value": 12, "label": "Captain III", "insignia": "lspd/captain.webp", "grade": 12},
+          {"value": 13, "label": "Commander", "insignia": "lspd/commander.webp", "grade": 13},
+          {"value": 14, "label": "Deputy Chief", "insignia": "lspd/deputy_chief.webp", "grade": 14},
+          {"value": 15, "label": "Assistant Chief of Police", "insignia": "lspd/assistant_chief.webp", "grade": 15},
+          {"value": 16, "label": "Chief of Police", "insignia": "lspd/chief.webp", "grade": 16},
+          {"value": 17, "label": "Agent", "insignia": "lspd/fib.webp", "grade": 17},
+          {"value": 18, "label": "Special Agent", "insignia": "lspd/fib.webp", "grade": 18},
+          {"value": 19, "label": "Supervisor", "insignia": "lspd/fib.webp", "grade": 19},
+          {"value": 20, "label": "Deputy Director", "insignia": "lspd/fib.webp", "grade": 20},
+          {"value": 21, "label": "Director", "insignia": "lspd/fib.webp", "grade": 21}
+        ]
+      },
+      {
+        "value": 1,
+        "label": "LSMD",
+        "job": "ambulance",
+        "emblem": "lsmd.webp",
+        "ranks": [
+          {"value": 0, "label": "Trainee", "insignia": "lsmd/lsmd.webp", "grade": 0},
+          {"value": 1, "label": "Intern", "insignia": "lsmd/lsmd.webp", "grade": 1},
+          {"value": 2, "label": "Resident", "insignia": "lsmd/lsmd.webp", "grade": 2},
+          {"value": 3, "label": "General Practitioner", "insignia": "lsmd/lsmd.webp", "grade": 3},
+          {"value": 4, "label": "Specialist", "insignia": "lsmd/lsmd.webp", "grade": 4},
+          {"value": 5, "label": "Senior Specialist", "insignia": "lsmd/lsmd.webp", "grade": 5},
+          {"value": 6, "label": "Supervisor", "insignia": "lsmd/lsmd.webp", "grade": 6},
+          {"value": 7, "label": "Professor", "insignia": "lsmd/lsmd.webp", "grade": 7},
+          {"value": 8, "label": "Deputy Chief", "insignia": "lsmd/lsmd.webp", "grade": 8},
+          {"value": 9, "label": "Assistant Chief", "insignia": "lsmd/lsmd.webp", "grade": 9},
+          {"value": 10, "label": "Chief", "insignia": "lsmd/lsmd.webp", "grade": 10}
+        ]
+      },
+      {
+        "value": 2,
+        "label": "DOJ",
+        "job": "justice",
+        "emblem": "doj.webp",
+        "ranks": [
+          {"value": 0, "label": "Trainee", "insignia": "doj/doj.webp", "grade": 0},
+          {"value": 1, "label": "Marshal", "insignia": "doj/doj.webp", "grade": 1},
+          {"value": 2, "label": "SOG", "insignia": "doj/doj.webp", "grade": 2},
+          {"value": 3, "label": "Associate Director", "insignia": "doj/doj.webp", "grade": 3},
+          {"value": 4, "label": "Director", "insignia": "doj/doj.webp", "grade": 4},
+          {"value": 5, "label": "Prosecutor", "insignia": "doj/doj.webp", "grade": 5},
+          {"value": 6, "label": "Judge", "insignia": "doj/doj.webp", "grade": 6},
+          {"value": 6, "label": "Adviser", "insignia": "doj/doj.webp", "grade": 7},
+          {"value": 7, "label": "Attorney General", "insignia": "doj/doj.webp", "grade": 8}
+        ]
+      },
+      {
+        "value": 3,
+        "label": "Lawyer",
+        "job": "lawyer",
+        "emblem": "doj.webp",
+        "ranks": [
+          {"value": 0, "label": "Lawyer", "insignia": "doj/doj.webp", "grade": 0},
+          {"value": 1, "label": "HR Lawyer", "insignia": "doj/doj.webp", "grade": 1}
+        ]
+      },
+      {
+        "value": 4,
+        "label": "Goverment",
+        "job": "goverment",
+        "emblem": "GOV.png",
+        "ranks": [
+          {"value": 0, "label": "mayor", "insignia": "goverment/GOV.png", "grade": 0},
+          {"value": 1, "label": "agent", "insignia": "goverment/GOV.png", "grade": 1}
+        ]
+      }
+    ],
+    "sop": {
+      "categories": [
+        {"value": 0, "label": "General Procedures"},
+        {"value": 1, "label": "Patrol Procedures"},
+        {"value": 2, "label": "Traffic Enforcement"},
+        {"value": 3, "label": "Arrest Procedures"},
+        {"value": 4, "label": "Investigation Procedures"},
+        {"value": 5, "label": "Emergency Response"},
+        {"value": 6, "label": "Use of Force"},
+        {"value": 7, "label": "Equipment Usage"},
+        {"value": 8, "label": "Interagency Collaboration"},
+        {"value": 9, "label": "Training & Education"},
+        {"value": 10, "label": "Confidentiality & Information Handling"},
+        {"value": 11, "label": "Community Engagement"}
+      ]
+    }
+  },
+
+  "configurations": {
+    "staff": {
+      "no_image": "https://snworksceo.imgix.net/dtc/3f037af6-87ce-4a37-bb37-55b48029727d.sized-1000x1000.jpg?w=1000",
+      "show_alias": true,
+      "show_callsign": true,
+      "show_badgenumber": true,
+      "show_rank": true,
+      "show_department": true,
+      "show_roles": true,
+      "show_activity": true,
+      "show_incidents": true,
+      "show_reports": true,
+      "show_evidence": true
+    },
+    "categories": {
+      "swatches": [
+        "rgb(0, 0, 0)",
+        "rgb(24, 160, 88)",
+        "rgb(32, 128, 240)",
+        "rgb(240, 160, 32)",
+        "rgb(208, 48, 80)"
+      ]
+    },
+    "tags": [
+      {"id": 1, "label": "Stolen Vehicle", "color": "#4d4dff", "identifier": 6},
+      {"id": 2, "label": "Hit and Run", "color": "#b30000", "identifier": 3},
+      {"id": 3, "label": "Assault", "color": "#ff4d4d", "identifier": 3},
+      {"id": 4, "label": "Graffiti", "color": "#808080", "identifier": 3},
+      {"id": 5, "label": "Burglary", "color": "#ff8c1a", "identifier": 3},
+      {"id": 6, "label": "Robbery", "color": "#660066", "identifier": 3},
+      {"id": 7, "label": "Vandalism", "color": "#ff1a1a", "identifier": 3},
+      {"id": 8, "label": "Shooting", "color": "#cc0000", "identifier": 3},
+      {"id": 9, "label": "Suspicious Activity", "color": "#e6e600", "identifier": 4},
+      {"id": 10, "label": "Noise Complaint", "color": "#b3b3b3", "identifier": 4},
+      {"id": 11, "label": "Drugs", "color": "#262626", "identifier": 7},
+      {"id": 12, "label": "Weapons", "color": "#ff9999", "identifier": 7},
+      {"id": 13, "label": "Bloodstains", "color": "#800000", "identifier": 7},
+      {"id": 14, "label": "Fingerprints", "color": "#ffcc00", "identifier": 7},
+      {"id": 15, "label": "Footprints", "color": "#999999", "identifier": 7},
+      {"id": 16, "label": "Known for Graffiti", "color": "#808080", "identifier": null},
+      {"id": 17, "label": "Known for Drug Use", "color": "#262626", "identifier": null},
+      {"id": 18, "label": "Known for Assault", "color": "#ff4d4d", "identifier": null},
+      {"id": 19, "label": "Known for Robbery", "color": "#660066", "identifier": null},
+      {"id": 20, "label": "Known for Burglary", "color": "#ff8c1a", "identifier": null},
+      {"id": 21, "label": "Known for Vehicle Theft", "color": "#4d4dff", "identifier": null},
+      {"id": 22, "label": "Known Gang Member", "color": "#b30000", "identifier": null},
+      {"id": 23, "label": "Known Ballas Member", "color": "#990099", "identifier": null},
+      {"id": 24, "label": "Known Vagos Member", "color": "#008080", "identifier": null},
+      {"id": 25, "label": "Known Marabunta Grande Member", "color": "#ff751a", "identifier": null},
+      {"id": 26, "label": "Known Aztecas Member", "color": "#ff33ff", "identifier": null},
+      {"id": 27, "label": "Known Triads Member", "color": "#33ff33", "identifier": null},
+      {"id": 28, "label": "Known Yakuza Member", "color": "#ff80bf", "identifier": null},
+      {"id": 29, "label": "Known Mafia Member", "color": "#262626", "identifier": null},
+      {"id": 30, "label": "Unknown Gang Affiliation", "color": "#b3b3b3", "identifier": null}
+    ]
+  },
+
+  "add_user": {
+    "no_image": "https://snworksceo.imgix.net/dtc/3f037af6-87ce-4a37-bb37-55b48029727d.sized-1000x1000.jpg?w=1000"
+  },
+
+  "editor": {
+    "colors": [
+      { "label": "Default", "value": "rgba(255, 255, 255, 0.82)" },
+      { "label": "Black", "value": "black" },
+      { "label": "Red", "value": "red" },
+      { "label": "Green", "value": "green" },
+      { "label": "Blue", "value": "blue" }
+    ]
+  },
+
+  "error403": {
+    "image": "https://i.imgur.com/0tykmxD.gif"
+  }
+}

@@ -1,0 +1,151 @@
+-- FRAMEWORK DETECTION
+if GetResourceState('qb-core') == 'started' then Framework = 'qb' elseif GetResourceState('es_extended') == 'started' then Framework = 'esx' end
+if Framework == 'esx' then ESX = exports['es_extended']:getSharedObject() elseif Framework == 'qb' then QBCore = exports['qb-core']:GetCoreObject() end
+
+local invState = GetResourceState('ox_inventory') -- Get the resource state of ox_inventory
+
+local players = {} -- Table to store players
+
+-- RegisterCallback: Registers a callback function to be triggered later
+local RegisterCallback = function(name, cb)
+    if Framework == 'esx' then ESX.RegisterServerCallback(name, cb)
+    elseif Framework == 'qb' then QBCore.Functions.CreateCallback(name, cb) end
+end
+
+-- GetPlayer: Returns the player object for a given player source
+local GetPlayer = function(source)
+    if Framework == 'esx' then return ESX.GetPlayerFromId(source)
+    elseif Framework == 'qb' then return QBCore.Functions.GetPlayer(source) end
+end
+
+-- Define a function to get the (citizen) ID of a player
+local GetIdentifier = function(source, identifierType)
+    local player = GetPlayer(source)
+    if player then
+        if Framework == 'esx' then return player.identifier
+        elseif Framework == 'qb' then return player.PlayerData.citizenid end
+    end
+end
+
+-- ConvertMoneyType: convert MoneyType to framework specific variant if needed
+ConvertMoneyType = function(moneyType)
+    if moneyType == 'money' and Framework == 'qb' then
+        moneyType = 'cash'
+    elseif moneyType == 'cash' and Framework == 'esx' then
+        moneyType = 'money'
+    end
+
+    return moneyType
+end
+
+-- AddMoney: Add Money to a player's account
+local AddMoney = function(source, moneyType, amount)
+    local player = GetPlayer(source)
+    moneyType = ConvertMoneyType(moneyType)
+    
+    if player then
+        if Framework == 'esx' then player.addAccountMoney(moneyType, amount)
+        elseif Framework == 'qb' then player.Functions.AddMoney(moneyType, amount) end
+    end
+end
+
+-- AddItem: Add Item to a player's account
+local AddItem = function(source, item, count, slot, metadata)
+    if count == nil then count = 1 end
+
+    local player = GetPlayer(source)
+
+    if invState == 'started' then return exports['ox_inventory']:AddItem(source, item, count, metadata, slot) else
+        if Framework == 'esx' then return player.addInventoryItem(item, count, metadata, slot)
+        elseif Framework == 'qb' then player.Functions.AddItem(item, count, slot, metadata) TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item], 'add', count) end
+    end
+end
+
+-- isPlayer: Checks if a player is inside the players table
+local IsPlayer = function(src)
+    local retval = false
+    for i=1, #players do
+        if players[i].id == src then retval = true
+            break
+        end
+    end
+    return retval
+end
+
+-- RemovePlayer: Removes a player from the players table
+local RemovePlayer = function(playerId)
+    for i=1, #players do
+        if players[i].id == playerId then
+            table.remove(players, i)
+            break
+        end
+    end
+end
+
+-- AddPlayer: Add a player to the players table
+local AddPlayer = function(id)
+    local identifier = GetIdentifier(id)
+    players[#players+1] = { id = id, citizenid = identifier }
+end
+
+-- Export the AddPlayer function
+exports('AddPlayer', AddPlayer)
+
+local Contains = function(table, element)
+    for _, value in pairs(table) do
+        if value == element then
+            return true
+        end
+    end
+    return false
+end
+
+RegisterNetEvent('sd-minesweeper:server:dostuff', function(data)
+    local src = source
+    if not IsPlayer(src) then print("Player with the ID: " .. src .. " and identifier " .. GetIdentifier(src) .. " tried to run the money event without being in the players table") return end
+
+    -- if data.goldenBox and data.specialItem then
+    --     if Contains(Config.Items, data.specialItem) then
+    --         AddItem(src, data.specialItem, 1) else print("Player with the ID: " .. src .. " and identifier " .. GetIdentifier(src) .. " attempted to add an invalid item: " .. data.specialItem) return
+    --     end
+    -- end
+
+    if Config.MaxMoney.Enable and data.cashAmount > Config.MaxMoney.Amount then print("Player with the ID: " .. src .. " and identifier " .. GetIdentifier(src) .. " attempted to add money exceeding the limit: " .. data.cashAmount) return end
+  
+
+    if Config.DirtyCash then
+        if Framework == 'qb' then
+            if Config.MetaData then 
+                local info = { worth = data.cashAmount }
+                AddItem(src, 'banded_cash', 1, false, info)
+            else 
+                AddItem(src, 'banded_cash', data.cashAmount)
+            end
+
+           
+        elseif Framework == 'esx' then
+            local Player = ESX.GetPlayerFromId(src)
+            Player.addAccountMoney('black_money', data.cashAmount)
+        end
+    else
+        AddMoney(src, 'cash', data.cashAmount)
+    end
+    local givesafe=''
+    if math.random(1,100)>65 then
+        AddItem(src, 'safe_cracker', 1)
+        givesafe="And 1 Safe Cracker"
+    end
+    local Player = QBCore.Functions.GetPlayer(src)
+    TriggerEvent('qb-log:server:CreateLog', 'storerob', 'Store Robbery', 'green', Player.PlayerData.charinfo.firstname..' '..Player.PlayerData.charinfo.lastname .. ' (' .. Player.PlayerData.citizenid .. ') Successfully Robbed a Store and got $'.. data.cashAmount..' banded cash '..givesafe)
+    RemovePlayer(src)
+end)
+
+RegisterNetEvent('sd-minesweeper:server:startminigame', function(coord)
+    local src = source
+	local Player = QBCore.Functions.GetPlayer(src)
+    TriggerEvent('qb-log:server:CreateLog', 'storerob', 'Store Robbery', 'red',Player.PlayerData.charinfo.firstname..' '..Player.PlayerData.charinfo.lastname ..'('..Player.PlayerData.citizenid ..') \nStore Coord: '..coord)
+    local quantity=math.random(70,100)
+    AddPlayer(source)
+    TriggerClientEvent('sd-minesweeper:client:start', source, 'Register Balance', 'fas fa-shopping-cart', 6, quantity, 1.05, '', 20000)
+end)
+

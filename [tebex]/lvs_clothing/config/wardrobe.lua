@@ -1,0 +1,59 @@
+
+Config.PlayerWardrobe = {
+    -- Players can open their personal wardrobe in their house and apartment systems compatible with the script.
+    -- Additionally, you can add player wardrobes in any location on the map.
+    -- Be careful not to overlap these zones with the store zones
+
+    -- Sample outfit wardrobe
+    -- {
+    --     coords = vector4(429.75, -811.22, 29.49, 353.33),
+    --     size = vector3(2, 2, 2),
+    --     rotation = 353.33,
+    --     usePoly = false,
+    --     points = {},
+    --     --job = "police",
+    --     --citizenIDs = {"LVS12345"}
+    -- },
+    -- {
+    --     coords = vector4(71.27, -1387.73, 29.38, 178.64),
+    --     size = vector3(2, 2, 2),
+    --     rotation = 178.64,
+    --     usePoly = false,
+    --     points = {},
+    -- },
+    -- {
+    --     coords = vector4(-820.17, -1067.48, 11.33, 126.62),
+    --     size = vector3(2, 2, 2),
+    --     rotation = 126.62,
+    --     usePoly = false,
+    --     points = {},
+    -- },
+    -- {
+    --     coords = vector4(1698.72, 4818.31, 42.06, 5.87),
+    --     size = vector3(2, 2, 2),
+    --     rotation = 5.87,
+    --     usePoly = false,
+    --     points = {},
+    -- },
+    -- {
+    --     coords = vector4(3.9, 6505.87, 31.88, 314.57),
+    --     size = vector3(2, 2, 2),
+    --     rotation = 314.57,
+    --     usePoly = false,
+    --     points = {},
+    -- },
+    -- {
+    --     coords = vector4(1201.84, 2714.42, 38.22, 86.55),
+    --     size = vector3(2, 2, 2),
+    --     rotation = 86.55,
+    --     usePoly = false,
+    --     points = {},
+    -- },
+    -- {
+    --     coords = vector4(-1100.43, 2717.11, 19.11, 131.97),
+    --     size = vector3(2, 2, 2),
+    --     rotation = 131.97,
+    --     usePoly = false,
+    --     points = {},
+    -- },
+}

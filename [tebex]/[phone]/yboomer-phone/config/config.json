@@ -1,0 +1,68 @@
+{
+  "aikon": {
+    "sounds": {
+      "ringtones": [
+        {
+          "key": "default",
+          "name": "Default",
+          "extension": "mp3"
+        },
+        {
+          "key": "2pac_all_eyes_on_me",
+          "name": "2Pac - All Eyes On Me",
+          "extension": "mp3"
+        },
+        {
+          "key": "azis_motel",
+          "name": "Azis - Motel",
+          "extension": "mp3"
+        },
+        {
+          "key": "MeGustaTu",
+          "name": "MeGustaTu",
+          "extension": "mp3"
+        }
+      ],
+      "notifications": [
+        {
+          "key": "default",
+          "name": "Default",
+          "extension": "mp3"
+        },
+        {
+          "key": "ding",
+          "name": "Ding",
+          "extension": "mp3"
+        },
+        {
+          "key": "RingRing",
+          "name": "RingRing",
+          "extension": "mp3"
+        },
+        {
+          "key": "Spaceline",
+          "name": "Spaceline",
+          "extension": "mp3"
+        },
+        {
+          "key": "Whistle",
+          "name": "Whistle",
+          "extension": "mp3"
+        }
+      ]
+    },
+    "wallpapers": [
+      {
+        "key": "wallpaper",
+        "name": "Wallpaper 1",
+        "extension": "png"
+      },
+      {
+        "key": "mag_wallpaper_06",
+        "name": "Wallpaper 2",
+        "extension": "webp"
+      }
+    ],
+    "colors": ["#ff571f", "#eb4034", "#6fd428", "#1c9c7c", "#1c459c", "#912bc4"]
+  }
+}

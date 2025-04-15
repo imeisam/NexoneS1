@@ -1,0 +1,47 @@
+.container {
+  height: 98%;
+  overflow: auto;
+}
+
+.card {
+  position: relative;
+  background-color: #232533;
+  box-shadow: 0px 0px 5px 7px rgba(0, 0, 0, 0.085);
+  height: 300px;
+}
+
+.delete {
+  position: absolute;
+  display: flex;
+  z-index: 2;
+  right: 0;
+  margin-right: 3px;
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.hover {
+  position: absolute;
+  display: flex;
+  color: white;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  top: 0;
+  margin-top: 50px;
+  text-shadow: 1px 2px 5px black;
+  z-index: 1;
+}
+
+.title {
+  display: block;
+  margin-top: var(--mantine-spacing-md);
+  margin-bottom: rem(5px);
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 87%;
+  margin-bottom: 8px;
+}

@@ -1,0 +1,69 @@
+.container {
+    height: 90%;
+    overflow-x: hidden;
+    margin-top: 10px;
+}
+
+
+/* 1080p (1920x1080) */
+@media (max-height: 1080px) {
+    .container {
+        max-height: 82%;
+    }
+}
+
+/* 720p (1280x720) */
+@media (max-height: 720px) {
+    .container {
+        max-height: 79%;
+    }
+}
+
+/* Custom smaller resolutions */
+@media (max-height: 600px) {
+    .container {
+        max-height: 76%;
+    }
+}
+
+@media (max-height: 480px) {
+    .container {
+        max-height: 73%;
+    }
+}
+
+@media (max-height: 360px) {
+    .container {
+        max-height: 70%;
+    }
+}
+
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(circle, rgba(129, 131, 138, 0.35) 0%, rgba(63, 65, 74, 0.45) 90%);
+    width: 200px;
+    height: 245px;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.image {
+    width: 100px;
+    height: 100px;
+}
+
+.name {
+    margin-top: 10px;
+    width: 150px;
+    text-align: center;
+}

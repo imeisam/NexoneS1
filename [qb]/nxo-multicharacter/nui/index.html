@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="tebex-integration" style="display: none">
+      <div class="header-of-tebex">
+        <h1>Tebex Transaction Code</h1>
+        <p>
+          Enter your transaction code, lorem ipsum simply dummy text. <br />
+          &nbsp;<span style="text-align: center; color: rgba(174, 227, 63, 1)"
+            >(Press escape for exit.)</span
+          >
+        </p>
+      </div>
+      <input
+        type="text"
+        placeholder="tbx-23dasd230ad23292jsda"
+        name="tebex-code"
+      />
+      <button class="confirm-buying">Confirm</button>
+    </div>
+    <div class="delete-confirmation" style="display: none">
+      <div class="header-of-input">
+        <h1>Character deletion</h1>
+        <p>
+          Are you sure you want too delete this character ?<br />
+          &nbsp;<span style="text-align: center; color: rgb(214, 13, 13)"
+            >(This action is irreversible.)</span
+          >
+        </p>
+      </div>
+      <button class="confirm-delete">Accept</button>
+      <button class="cancel-delete">Decline</button>
+    </div>
+    <div class="character-slot-contain">
+      <!-- <div class="char-slot" data-status="created">
+            <img src="assets/person.png" alt="">
+        </div>
+        <div class="char-slot" data-status="available">
+            <img src="assets/availableperson.png" alt="">
+        </div>
+        <div class="char-slot" data-status="none">
+            <img src="assets/one.png" alt="">
+        </div>
+        <div class="char-slot" data-status="none">
+            <img src="assets/one.png" alt="">
+        </div> -->
+    </div>
+    <div class="spawn-ui-contain" style="display: none">
+      <div class="header-spawn">
+        <h1>Choose</h1>
+        <p>Spawn point</p>
+      </div>
+
+      <div class="spawn-locations-list">
+       
+      </div>
+      <div class="join-btn" id="spawn-play">
+        Spawn
+        <div class="border-circles">
+          <div class="main-border-circle">
+            <div class="mid-border-circle">
+              <div class="small-border-circle">
+                <img src="assets/join-man.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-contain" style="display: none">
+      <div class="player-name-contain">
+        <h1 id="name">Mike</h1>
+        <p id="surname">Wazovski</p>
+      </div>
+      <div class="character-information-panel">
+        <div class="char-info">
+          <div class="char-info-header loc">Location</div>
+          <div class="char-info-description">
+            <span id="location">Turkey</span>
+            <img src="assets/location.png" alt="" />
+          </div>
+        </div>
+        <div class="char-info">
+          <div class="char-info-header bd">Birthday</div>
+          <div class="char-info-description">
+            <span id="birthdate">17, June</span
+            ><img src="assets/birthday.png" alt="" />
+          </div>
+        </div>
+        <!-- <div class="char-info">
+          <div class="char-info-header job">Job</div>
+          <div class="char-info-description">
+            <span id="job">Police</span>
+            <img src="assets/job.png" alt="" />
+          </div>
+        </div> -->
+        <!-- <div class="char-info">
+          <div class="char-info-header money">Money</div>
+          <div class="char-info-description">
+            <span id="money">12.033</span>$
+            <img src="assets/money.png" alt="" />
+          </div>
+        </div> -->
+      </div>
+      <div class="buttons-actions-play-delete">
+        <div class="join-btn" id="play-game">
+          JOIN
+          <div class="border-circles">
+            <div class="main-border-circle">
+              <div class="mid-border-circle">
+                <div class="small-border-circle">
+                  <img src="assets/join-man.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="join-btn" id="delete-char">
+          Delete Char
+          <img src="assets/delete-svgrepo-com.svg" alt="" style="width: 3vh" />
+        </div> -->
+      </div>
+    </div>
+    <div class="create-char-contain" style="display: none">
+      <div class="header-of-contain">
+        <h1>New <br /><span>Character</span></h1>
+        <p>Fill up the data required to create your character</p>
+      </div>
+      <div class="char-input-row">
+        <div class="char-input-main">
+          <label for="name">Name</label>
+          <!-- <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder=""
+            class="info-inp"
+          /> -->
+          <select name="namesc" onchange="nameSelect();" class="" id="namesc" >
+            <option value="">Select Username</option>
+            <option value="nanm">namw</option>
+          </select>
+          <img src="assets/inputperson.png" alt="" />
+        </div>
+        <!-- <div class="char-input-main">
+          <label for="surname">Lastname</label>
+          <input
+            type="text"
+            id="surname"
+            name="surname"
+            placeholder=""
+            class="info-inp"
+          />
+          <img src="assets/inputperson.png" alt="" />
+        </div> -->
+        <div class="char-input-main" id="nation-context">
+          <label for="location">Location</label>
+          <div class="location" id="nation-text">Nationality</div>
+          <img src="assets/arrow.png" alt="" />
+          <div class="context-menu" style="display: none">
+            <div class="search-by-name">
+              <input type="text" id="search-inp" placeholder="Search by name" />
+              <img
+                src="assets/search.png"
+                alt=""
+                style="left: 0; top: 0; position: relative"
+              />
+            </div>
+            <div class="places-row">
+              <!-- <div class="select-nation" data-selected="true">
+                            Afghan
+                            <img src="assets/selected.png" alt="" style="left: 0; top: 0; position: relative;">
+                        </div> -->
+              <!-- <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div>
+                        <div class="select-nation">Afghan</div> -->
+            </div>
+          </div>
+        </div>
+        <!-- <div class="char-input-main">
+          <label for="height">Height</label>
+          <input
+            type="number"
+            id="height"
+            name="height"
+            placeholder="172 CM"
+            class="info-inp"
+          />
+          <img src="assets/height.png" alt="" />
+        </div> -->
+        <div class="char-input-main">
+
+          <label for="birthdate">Birthday</label>
+          <input type="date" id="birthdate" name="birthdate" class="info-inp" />
+          <img src="assets/date.png" alt="" />
+        </div>
+        <div class="char-input-main">
+          <label for="gender">Gender</label>
+          <div class="gender">Select a gender</div>
+          <div class="gender-row">
+            <div class="female gn" data-selected="false" data-type="female">
+              <img
+                style="position: relative; top: 0; right: 0"
+                src="assets/male.png"
+                alt=""
+              />
+            </div>
+            <div class="male gn" data-selected="false" data-type="male">
+              <img
+                style="position: relative; top: 0; right: 0"
+                src="assets/female.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="join-btn" id="create-char">
+        <span class="create-new-char-text">CREATE NEW CHAR</span> <img src="assets/join-man.png" alt="" />
+        <div class="border-circles">
+          <div class="main-border-circle">
+            <div class="mid-border-circle">
+              <div class="small-border-circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

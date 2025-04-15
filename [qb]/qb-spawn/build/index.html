@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css"
+    />
+
+    <!-- <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic"
+      rel="stylesheet"
+    /> -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tippy.js@6.3.7/animations/scale.css"
+    />
+  </head>
+  <body class="body w-full h-screen overflow-hidden select-none">
+    <div
+      class="spawn-loading w-full h-full fixed bg-black z-50 duration-1000"
+    ></div>
+    <header class="fixed top-0 w-full">
+      <div class="absolute top-5 left-5">
+        <img
+          src="./image/logo.png"
+          alt="Nexone Logo"
+          class="w-[2.5vw] drop-shadow-[0_5px_15px_hsla(348,83%,47%,0.4)]"
+        />
+      </div>
+      <div data-aos="fade-down" data-aos-duration="1000">
+        <div
+          class="absolute top-0 left-1/2 text-center -translate-x-1/2 flex items-center header-border pt-8 pb-3 w-[80%] justify-center after:bg-[#dc143c] after:w-[14vw] after:absolute after:drop-shadow-[0_3px_10px_hsla(348,83%,47%,1)] after:rounded-full after:h-1 after:-bottom-[2px] after:left-1/2 after:-translate-x-1/2"
+        >
+          <div class="absolute left-1/2 -translate-x-[9vw]">
+            <img
+              src="./image/location.svg"
+              alt="Location icon"
+              class="drop-shadow-[0_3px_10px_hsla(348,83%,47%,0.8)] w-[2.5vw]"
+            />
+          </div>
+          <div>
+            <h1 class="text-white font-medium text-[1vw]">Spawn Selector</h1>
+            <p class="text-gray-400 text-[0.8vw]">
+              Click on a location to wake up there
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="w-full h-full flex justify-center items-center map-parent">
+      <img src="./image/map.png" alt="map" class="w-full h-full" />
+      <div
+        class="spawn-location-parent w-full h-full absolute top-0 left-0"
+      ></div>
+    </main>
+
+    <footer
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      data-aos-delay="1500"
+      class="fixed bottom-5 left-5 w-full h-full"
+    >
+      <div class="absolute bottom-5 left-4 flex items-end gap-6">
+        <div
+          class="bg-white bg-opacity-20 rounded-md backdrop-blur-sm p-[0.8vw] grid grid-cols-4 gap-x-10 gap-y-5"
+        >
+          <div class="flex gap-2 items-center col-span-2">
+            <div
+              class="text-[1.5vw] text-gray-300 drop-shadow-[0px_0px_5px_rgba(255,255,255,1)]"
+            >
+              <i class="fa-light fa-clock"></i>
+            </div>
+            <div class="text-gray-200">
+              <p class="time-text text-[1.2vw] font-medium leading-5">09:45</p>
+              <p class="date-text leading-5 text-[0.8vw]">Friday, Jan 12</p>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center col-span-2">
+            <div
+              class="weather-icon text-[1.5vw] text-gray-300 drop-shadow-[0px_0px_5px_rgba(255,255,255,1)]"
+            >
+              <i class="fa-light fa-sun-bright"></i>
+            </div>
+            <div class="text-gray-200">
+              <p class="text-[0.8vw] font-medium leading-4 text-gray-400">
+                Weather
+              </p>
+              <p class="weather-text leading-5 text-[0.8vw] capitalize">
+                Mostly Clear
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center col-span-2">
+            <div
+              class="text-[1.5vw] text-gray-300 drop-shadow-[0px_0px_5px_rgba(255,255,255,1)]"
+            >
+              <i class="fa-light fa-wind"></i>
+            </div>
+            <div class="text-gray-200">
+              <p class="text-[0.8vw] font-medium leading-4 text-gray-400">
+                Wind Speed
+              </p>
+              <p class="wind-speed-text leading-5 text-[0.8vw]">10 m /s</p>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center col-span-2">
+            <div
+              class="text-[1.5vw] text-gray-300 drop-shadow-[0px_0px_5px_rgba(255,255,255,1)]"
+            >
+              <i class="fa-light fa-temperature-list"></i>
+            </div>
+            <div class="text-gray-200">
+              <p class="text-[0.8vw] font-medium leading-4 text-gray-400">
+                Temperature
+              </p>
+              <p class="temp-text leading-5 text-[0.8vw]">8 Celsius</p>
+            </div>
+          </div>
+        </div>
+        <div class="active:scale-95 duration-200 mb-5">
+          <button
+            class="button"
+            data-text="Awesome"
+            onclick="selectLocation('last')"
+            data-tippy-content="Tooltip"
+          >
+            <span class="actual-text">&nbsp;LAST LOCATION&nbsp;</span>
+            <span aria-hidden="true" class="hover-text"
+              >&nbsp;LAST&nbsp;LOCATION&nbsp;</span
+            >
+          </button>
+        </div>
+      </div>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <script src="./main.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+        <link href="./css/style.css" media="all" rel="stylesheet" />
+        <title>Origen Housing</title>
+    </head>
+    <body>
+        <div id="app" v-if="visible">
+
+            <transition name="fade">
+                <div class="elevator-container" v-if="elevator.visible">
+                    <div class="elevator-content">
+                        <div class="title w-100">Elevator</div>
+                        <div class="elevator-buttons">
+                            <div 
+                                class="elevator-button" 
+                                :class="elevator.currentFloor != null && elevator.currentFloor == key ? 'selected' : ''"
+                                v-for="(floor, key) in elevator.floors"
+                                @click="selectFloor(key)"
+                            >
+                                <span>{{key + 1}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </transition>
+
+            <div class="container">
+                <div class="notifications">
+                    <div class="notification animate__fast animate__animated animate__bounceInDown" :class="item.type" v-for="item in notifications" :id="item.id">
+                        <div class="icon">
+                            <i :class="item.icon"></i>
+                        </div>
+                        <div class="info">
+                            <div class="name">{{item.title}}</div>
+                            <div class="message">{{item.message}}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modals"></div>
+            </div>
+
+            <transition name="fade">
+                <div class="house_panel" v-if="house.visible">
+                    <transition name="scale_in">
+                        <div class="buy-object d-flex align-items-center justify-content-center flex-column" v-if="upgrades.visible">
+                            <div class="d-flex flex-column align-items-center">
+                                <h4>{{ translations.upgradeBuy }}</h4>
+                                <div class="d-flex align-items-center justify-content-center flex-column object mt-5">
+                                    <img :src="'./img/upgrades/' + upgrades.item + '.png'" @error="setDefaultImage">
+                                    <h5 class="name">{{upgrades.title}}</h5>
+                                </div>
+    
+                                <button class="mt-4" @click="buyUpgrade(false)">{{ translations.continue }} <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </transition>
+
+                    <transition name="fade_fast">
+                        <div class="info-upgrade d-flex justify-content-start flex-column" v-if="upgrades.info.visible" :style="{ top: upgrades.info.position }">
+                            <h5><i class="lni lni-question-circle"></i> {{upgrades.info.title}}</h5>
+                            <span>{{ upgrades.info.text }}</span>
+                        </div>
+                    </transition>
+
+                    <div class="content">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-4">
+                                <div class="housing-title animate__animated animate__fadeInUp"> 
+                                    <span class="name d-flex align-items-center">
+                                        {{house.data.name}}
+                                    </span>
+                                    <div class="info d-flex align-items-center justify-content-start">
+                                        <div class="info_box"><span>#{{house.data.data.number}}</span></div>
+                                        <div class="info_box"><span>{{house.data.data.location}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="d-flex justify-content-end" style="width:30vh;">
+                                <div class="housing-button ms-3 btn-sound" @click="openFurnitureMenu">
+                                    <i class="fa-solid fa-paintbrush"></i>
+                                    <span>{{ translations.decorate }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 animate__animated animate__fast animate__fadeInLeft">
+                                <div class="keys-management h-max">
+                                    <div class="d-flex align-items-center w-100">
+                                        <div class="title w-100">{{ translations.keysManagement }}</div>
+                                        <button class="add-holder btn-sound" @click="addKeyModal">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="list">
+                                        <div class="user" v-for="data, key in house.data.holders" :key="key" v-if="data && data.name && data.owner">
+                                            <img src="./img/user.png" class="icon">
+                                            <div class="w-100 name">
+                                                {{data.name}}
+                                            </div>
+                                        </div>
+
+                                        <div class="user" v-for="data, key in house.data.holders" :key="key" v-if="data && data.name && !data.owner">
+                                            <img src="./img/user.png" class="icon">
+                                            <div class="w-100 name">
+                                                {{data.name}}
+                                            </div>
+                                            <div class="user-action delete btn-sound" @click="deleteKey(key)" v-if="!data.owner">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 h-max">
+                                <div class="upgrade_panel animate__animated animate__fast animate__slideInDown">
+                                    <div class="tabs">
+                                        <div 
+                                            class="tab btn-sound" 
+                                            :class="house.currentTab == 'upgrades' ? 'selected' : ''"
+                                            @click="changeHouseTab('upgrades')"
+                                            v-if="house.data.data.type === 'ipl' && house.data.data.style && ipls[house.data.data.model]"
+                                        >
+                                            <i class="fa-solid fa-paint-roller"></i>
+                                            <span>{{translations.upgradesBtn}}</span>
+                                        </div>
+                                        <div 
+                                            class="tab btn-sound" 
+                                            :class="house.currentTab == 'cameras' ? 'selected' : ''"
+                                            @click="changeHouseTab('cameras')"
+                                        >
+                                            <i class="fa-solid fa-video"></i>
+                                            <span>{{translations.cameras}}</span>
+                                        </div>
+                                    </div>
+
+
+                                    <transition name="fade">  
+                                        <template v-if="house.currentTab == 'upgrades' && house.data.data.type === 'ipl' && house.data.data.style && ipls[house.data.data.model]">    
+                                            <div class="d-flex align-items-center justify-content-center flex-column" style="margin-top: 2vh;">
+                                                <div class="mySwiper slider-preview tab-upgrades">
+                                                    <div class="swiper-wrapper">
+                                                        <div class="swiper-slide item" v-for="item in ipls[house.data.data.model].list">
+                                                            <div class="badges d-flex align-items-center">
+                                                                <span 
+                                                                    class="price"
+                                                                    :class="house.data.data.style == item.name ? 'bg-white text-dark font fw-bold' : ''"
+                                                                >
+                                                                    {{house.data.data.style == item.name ? translations.acquired : '$' + item.price}}
+                                                                </span>
+                                                                <span class="name">
+                                                                    {{item.label}}
+                                                                </span>
+                                                            </div>
+                                                            <img :src="getImageUrl(item.name)" class="item-img" @error="setDefaultImage">
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+                                                <div class="d-flex align-items-center justify-content-between info" style="width: 75vh;">
+                                                    <span class="description">
+                                                        {{translations.houseupgraadeInfo}}
+                                                    </span>
+                                                    <div 
+                                                        class="buy btn-sound" 
+                                                        :class="house.currentUpgrade == null ? 'disabled' : ''"
+                                                        @click="buyHouseUpgrade"
+                                                    >
+                                                        <span>{{ translations.buy }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+
+                                        <template v-else-if="house.currentTab == 'cameras'">
+                                            <div class="mySwiper slider-preview tab-cameras" v-if="!house.upgrades.cameras.locked">
+                                                <div class="swiper-wrapper">
+                                                    <div 
+                                                        class="swiper-slide btn-sound item" 
+                                                        v-for="(camera, key, index) in house.data.cameras" 
+                                                        :key="index"
+                                                        @click="useCamera(key)"
+                                                    >
+                                                        <img :src="camera.broken ? './img/camera_broked.png' : './img/camera.png'" class="item-img" @error="setDefaultImage">
+                                                        <span class="name">{{'Camera #' + (index + 1)}}</span>
+                                                    </div>
+                                                    
+                                                    <div 
+                                                        class="swiper-slide item" 
+                                                        v-if="house.data.emptyCameras"
+                                                        v-for="index in this.house.data.emptyCameras" 
+                                                        :key="'empty-' + index"
+                                                    >
+                                                    <img src="./img/add.png" class="img-add" @error="setDefaultImage">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="no-lights d-flex align-items-center justify-content-center flex-column" v-else>
+                                                <span>{{ translations.noCamerasModule }}</span>
+                                                <img src="./img/no-video.png">
+                                            </div> 
+                                        </template>
+
+                                    </transition>
+                                </div>
+                                <div class="row mt-4 animate__animated animate__fast animate__fadeInUp" style="height: 35.8vh;">
+                                    <div class="col-5">
+                                        <div class="lights">
+                                            <div class="header d-flex align-items-center justify-content-between">
+                                                <h4><i class="fa-solid fa-lightbulb"></i> {{ translations.lights }}</h4>
+                                            </div>
+                                            <template v-if="house.data.lightsCount > 0">
+                                                <div class="lights-content">
+                                                    <div 
+                                                        class="light" 
+                                                        v-for="(item, index) in house.data.lights" 
+                                                        :class="item.state ? 'on' : 'off'"
+                                                        v-if="currentLight == null"
+                                                        @click="openLightMenu(index, $event)"
+                                                        :key="index"
+                                                    >
+                                                        <div 
+                                                            class="status"
+                                                            @click="toggleLight(index, $event)" 
+                                                        >
+                                                            <i class="fa-solid fa-lightbulb"></i>
+                                                        </div>
+                                                        <div class="text d-flex flex-column">
+                                                            <span class="name">{{ item.label || 'Light' }}</span>
+                                                            <span>{{ item.state ? 'ON' : 'OFF' }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div 
+                                                        class="light d-flex align-items-center justify-content-center" 
+                                                        v-for="item in this.house.data.emptyLights" 
+                                                        v-if="currentLight == null"
+                                                    >
+                                                        <div style="font-size: 1.5vh; color: rgba(255, 255, 255, 0.3);">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div 
+                                                        class="light-menu"
+                                                        v-if="currentLight !== null"
+                                                    >
+                                                        <div class="d-flex align-items-center">
+                                                            <div 
+                                                                class="back"
+                                                                @click="closeLightMenu"
+                                                            >
+                                                                <i class="fa-solid fa-arrow-left"></i>
+                                                            </div>
+                                                            <span 
+                                                                class="l-title w-100" 
+                                                                v-if="!isEditingName"
+                                                                @dblclick="startEditingName"
+                                                            >
+                                                                {{editedName != '' ? editedName : house.data.lights[currentLight].label}}
+                                                            </span>
+                                                            <input 
+                                                                type="text" 
+                                                                v-model="editedName" 
+                                                                class="form-control" 
+                                                                v-if="isEditingName"
+                                                                @keyup.enter="finishEditingName"
+                                                                @blur="finishEditingName"
+                                                            >
+                                                        </div>
+                                                
+                                                        <div class="menu">
+                                                            <h5>{{ translations.colors }}</h5>
+                                                            <div class="color-list">
+                                                                <div 
+                                                                    class="item-color btn-sound" 
+                                                                    v-for="(color, index) in colors" 
+                                                                    :style="{ backgroundColor: 'rgb(' + color.join(',') + ')' }"
+                                                                    @click="selectColor(color)"
+                                                                    :class="isColorSelected(color) ? 'selected' : ''"
+                                                                    :key="index"
+                                                                ></div>
+                                                            </div>
+                                                
+                                                            <h5>{{ translations.intensity }}</h5>
+                                                            <label class="opacity-slider w-100">
+                                                                <input 
+                                                                    type="range" 
+                                                                    class="level" 
+                                                                    min="1" 
+                                                                    max="100" 
+                                                                    step="1" 
+                                                                    v-model="house.data.lights[currentLight].opacity"
+                                                                >
+                                                            </label>
+                                                        </div>
+                                                
+                                                        <button 
+                                                            class="btn-sound"
+                                                            @click="saveLightChanges"
+                                                        >
+                                                            {{ translations.saveChanges }}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <template v-else>  
+                                                <div class="no-lights d-flex align-items-center justify-content-center flex-column">
+                                                    <span>{{ translations.noLights }}</span>
+                                                    <img src="./img/no-lights.png">
+                                                </div> 
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="personalize">
+                                            <div class="header d-flex align-items-center justify-content-between sub">
+                                                <h4><i class="fa-solid fa-paint-roller"></i> {{ translations.personalizeBoard }}</h4>
+                                            </div>
+
+                                            <div class="boards-list">
+                                                <div 
+                                                    class="board" 
+                                                    v-for="(item, index) in house.data.boards" 
+                                                    :style="{ backgroundImage: item.url ? 'url(' + item.url + ')' : 'none' }"
+                                                >
+                                                    <div class="text d-flex flex-column" v-if="!item.url">
+                                                        <i class="fa-solid fa-image"></i>
+                                                    </div>
+
+                                                    <div class="edit btn-sound" v-if="isEditingURL == null || isEditingURL !== index" @click="isEditingURL = index">
+                                                        <i class="fa-solid fa-pen"></i>
+                                                    </div>
+
+                                                    <div class="edit active" v-else>
+                                                        <input 
+                                                            type="text" 
+                                                            v-model="newUrl" 
+                                                            @keyup.enter="saveBoardUrl(index, $event)"
+                                                            @blur="handleBlur(index)"
+                                                            :placeholder="item.url"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div 
+                                                    class="board" 
+                                                    v-for="(item, index) in house.data.emptyBoards" 
+                                                >
+                                                    <div class="text d-flex flex-column">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 h-max animate__animated animate__fast animate__fadeInRight">
+                                <div class="upgrades">
+                                    <div class="title">{{ translations.upgrades }}</div>
+                                    <div class="list">
+                                        <div class="upgrade" 
+                                            v-for="(item, key) in house.upgrades"
+                                            :class="!item.locked ? 'unlocked' : 'btn-sound'"
+                                            :data-upgrade="key"
+                                            @click="tryBuyUpgrade(key)"
+                                        >
+                                            <div class="info">
+                                                <div class="upgrade_name">
+                                                    <i :class="item.icon"></i>
+                                                    <span>{{item.label}}</span>
+                                                </div>
+                                                <div class="status d-flex align-items-center gap-2">
+                                                    <div class="badge price" v-if="item.locked">${{item.price}}</div>
+                                                    <div class="badge" :class="item.locked ? 'locked' : 'unlocked'">
+                                                        <i class="fa-solid fa-lock" v-if="item.locked"></i>
+                                                        <span v-else>{{ translations.acquired }}</span>
+                                                    </div>
+                                                    <div class="badge config btn-sound" v-if="!item.locked && item.configurable">
+                                                        <i class="fa-solid fa-gear"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="doors mt-4">
+                                    <div class="header d-flex align-items-center justify-content-between">
+                                        <h4>{{ translations.doors }} <span>{{ Object.keys(house.data.doors).length }}/{{ house.doorLimit }}</span></h4>
+                                        <div class="add btn-sound" v-if="house.data.data.type === 'mlo'" @click="createDoor">
+                                            <span><i class="fa-solid fa-plus"></i> {{ translations.add }}</span>
+                                        </div>
+                                    </div>
+                                    <template v-if="house.data.doors && Object.keys(house.data.doors).length > 0">
+                                        <div class="list">
+                                            <div class="door" v-for="(item, key) in house.data.doors" :key="key" v-if="item.name">
+                                                <div class="info">
+                                                    <div class="door_name">
+                                                        <i class="fa-solid fa-door-open"></i>
+                                                        <span>{{ item.name }}</span>
+                                                    </div>
+                                                    <div class="status">
+                                                        <div 
+                                                            class="badge btn-sound" 
+                                                            :class="item.locked ? 'locked' : 'unlocked'" 
+                                                            @click="toggleLock(key)"
+                                                        >
+                                                            <span>{{ item.locked ? translations.locked : translations.unlocked }}</span>
+                                                        </div>
+
+                                                        <div 
+                                                            class="badge btn-sound delete" 
+                                                            v-if="house.data.data.type === 'mlo'"
+                                                            @click="deleteDoor(key)"
+                                                        >
+                                                            <span><i class="fa-solid fa-trash"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <span class="action" @click="toggleLock(key)">
+                                                    <i class="fa-solid fa-lock" v-if="!item.locked"></i>
+                                                    <i class="fa-solid fa-unlock" v-else></i>
+                                                    {{ item.locked ? 'Desbloquear' : 'Bloquear' }}
+                                                </span> -->
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template class="d-flex align-items-center justify-content-center" v-else>
+                                        <div class="no-items">{{ translations.noDoors }}</div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </transition>
+
+            <transition name="fade_top">
+                <div class="title_h" v-if="info.visible">
+                    <h4>{{info.text}}</h4>
+                </div>
+            </transition>
+
+            <transition name="fade_right">
+                <div class="furniture d-flex" v-if="furniture.visible">
+
+                    <div class="options">
+                        <div 
+                            class="option btn-sound" 
+                            @click="furniture.selectedOption = 'all'"
+                            :class="furniture.selectedOption == 'all' ? 'selected' : ''"
+                        >
+                            <i class="fa-solid fa-paint-brush"></i>
+                            <span>{{ translations.all }}</span>
+                        </div>
+                        <div 
+                            class="option btn-sound" 
+                            @click="furniture.selectedOption = 'buyed'"
+                            :class="furniture.selectedOption == 'buyed' ? 'selected' : ''"
+                        >
+                            <i class="fa-solid fa-house-user"></i>
+                            <span>{{ translations.buyed }}</span>
+                        </div>
+                    </div>
+
+                    <template v-if="furniture.selectedOption == 'all'">   
+                        <div class="expand-content">                         
+                            <transition name="expand_right">
+                                <div class="items" v-if="furniture.selectCategory !== null && furniture.selectCategory !== undefined">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <h4 class="current_category d-flex align-items-center justify-content-between">
+                                            <span>{{furniture.categories[furniture.selectCategory].label}}</span>
+                
+                                            <div class="actions">
+                                                <button 
+                                                    class="action" 
+                                                    :class="furniture.currentObject ? 'buy' : 'disabled'"
+                                                    :disabled="!furniture.currentObject"
+                                                    @click="startPlacement()"
+                                                >
+                                                    <i class="fa-solid fa-plus"></i>
+                                                    <span>{{ translations.place }}</span>
+                                                </button>
+                                            </div>
+                                        </h4>
+                                    </div>
+                                    <div class="objects">
+                                        <div class="object" 
+                                            v-for="(item, index) in furniture.items[furniture.selectCategory].items" 
+                                            @click="spawnObject(item.model)"
+                                        >
+                                            <img :src="'./img/furniture/' + item.model + '.png'" class="item-img" @error="setDefaultImage">
+                                            <span class="price">{{ !item.price ? furniture.defaultPrice > 0 ? '$' + furniture.defaultPrice : translations.free : item.price > 0 ? '$' + item.price : translations.free }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </transition>
+                        </div>
+
+                        <div class="categories">
+                            <div class="category btn-sound minimized bg-accent" v-if="furniture.minimized" @click="backCategory()">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                            <div class="category btn-sound" 
+                                v-for="(item, index) in furniture.categories"
+                                @click="selectFurnitureCategory(index)"
+                                :class="furniture.minimized ? 'minimized' : ''"
+                            >
+                                <i :class="item.icon"></i>
+                                <div class="title">
+                                    {{item.label}}
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else-if="furniture.selectedOption == 'buyed'">
+                        <div class="expand-content">                         
+                            <transition name="expand_right">
+                                <div class="items">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <h4 class="current_category d-flex align-items-center justify-content-between">
+                                            <span>{{ translations.buyed_furniture }}</span>
+                                        </h4>
+                                    </div>
+                                    <div class="objects">
+                                        <template v-if="furniture.buyedItems && Object.keys(furniture.buyedItems).length > 0">
+                                            <div class="object buyed-object" 
+                                                v-for="(item, index) in furniture.buyedItems"
+                                                :class="{selected: furniture.selectedObject == index}"
+                                                @click="selectObject(index)"
+                                            >
+                                                <img :src="'./img/furniture/' + item.model + '.png'" class="item-img" @error="setDefaultImage">
+    
+                                                <div class="object-actions">
+                                                    <div class="action edit" @click="editObject(index)">
+                                                        <i class="fa-solid fa-pencil"></i>
+                                                    </div>
+                                                    <div class="action delete" @click="deleteObject(index)">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <template v-else>
+                                            <div class="object buyed-object">
+                                                <img src="./img/add.png" class="no-item" @error="setDefaultImage">
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </transition>
+                        </div>
+                    </template>
+                </div>
+            </transition>
+
+            <div class="loading-object d-flex align-items-center flex-column" v-if="loading">
+                <div class="l-icon">
+                    <img src="./img/loading.png">
+                </div>
+                <div class="l-text">
+                    <span>{{translations.loading}}</span>
+                </div>
+            </div>
+
+            <transition name="fade">
+                <section 
+                    class="creation-selector" 
+                    v-if="menu.preview.visible"
+                    :class="menu.preview.hidden ? 'hidden' : ''"
+                >
+                    <div class="content">
+                        <div class="arrow prev">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <div class="mySwiper slider-preview" :class="{'reduced': menu.preview.itemLength <= 3}">
+                            <h4 class="title">{{menu.preview.title}}</h4>
+                            <div class="swiper-wrapper">
+                                <div 
+                                    v-for="item, index in menu.preview.items" 
+                                    :class="'swiper-slide item slide-' + index"
+                                >
+                                    <img :src="'./img/'+menu.preview.path+'/'+item.model+'.png'" class="item-img" @error="setDefaultImage">
+                                    <span class="house_name">{{item.label}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="arrow next">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </section>
+            </transition>
+
+            <transition name="fade">
+                <section class="management" v-if="menu.management">
+                    <div class="header d-flex align-items-center justify-content-start">
+                        <div class="title">
+                            {{translations.houseManage}}
+                        </div>
+                        <div class="button" @click="createHouse()">
+                            <img src="./img/house-add.png">
+                            <span>{{translations.create}}</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="search-items-2">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input
+                                type="text"
+                                class="form-control w-100"
+                                :placeholder="translations.houseSearch"
+                                style="border: none;"
+                                v-model="search.management.value"
+                            />
+                        </div>
+                        <div class="house-list">
+                            <table class="w-100 table-admin house-table">
+                                <thead>
+                                    <tr>
+                                        <th>{{translations.houseName}}</th>
+                                        <th>{{translations.owner}}</th>
+                                        <th>{{translations.houseType}}</th>
+                                        <th>{{translations.houseZone}}</th>
+                                        <th>{{translations.housePrice}}</th>
+                                        <th style="width: 20vh; text-align: center;">{{translations.houseActions}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template v-if="paginatedHouses && paginatedHouses.length > 0">
+                                        <tr v-for="item in paginatedHouses" v-if="item">
+                                            <td>{{item.name}}</td>
+                                            <td class="d-flex align-items-center justify-content-between">
+                                                <div class="house-id">
+                                                    {{item.citizenid && item.citizenid || translations.no_owner}}
+                                                </div>
+                                                <div class="btn-action" 
+                                                    style="margin-right: 0 !important;"
+                                                    v-if="item.citizenid"
+                                                    @click="copyClipboard(item.citizenid)"
+                                                >
+                                                    <i class="fa-solid fa-paste"></i>
+                                                </div>
+                                            </td>
+                                            <td>{{((item.data.type === 'shell' || item.data.type === 'ipl') && item.construction.model !== '') ? translations.construction : item.data.type === 'shell' && 'Shell' || item.data.type === 'ipl' && 'IPL' || 'MLO'}}</td>
+                                            <td class="location">{{item.data.location}}</td>
+                                            <td style="color: #42af72;">${{item.data.price}}</td>
+                                            <td class="d-flex align-items-center justify-content-center">
+                                                <div class="btn-action" @click="markPosition(item.id, $event)"><i class="fas fa-map-marker-alt"></i></div>
+                                                <div class="btn-action" @click="createHouse(item)"><i class="fas fa-pen"></i></div>
+                                                <div class="btn-action" @click="deleteHouse(item.id)" style="margin-right: 0 !important;"><i class="fas fa-trash"></i></div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                    <template v-else>
+                                        <tr>
+                                            <td colspan="6" class="text-center">{{translations.no_houses_search}}</td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <div class="pagination-controls">
+                                <div class="btn-action" @click="prevPage" :class="{ disabled: currentPage === 1 || currentPage === 0 }">
+                                    <i class="fas fa-chevron-left"></i>
+                                </div>
+                                <span class="page-info">{{currentPage}} / {{totalPages}}</span>
+                                <div class="btn-action" @click="nextPage" :class="{ disabled: currentPage === totalPages }">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </transition>
+
+            <transition name="fade_bottom">
+                <div class="controls-container" v-if="controlsHelp.visible">
+                    <div class="title" v-if="controlsHelp.title">
+                        <span>{{controlsHelp.title}}</span>
+                    </div>
+                    <div class="controls">
+                        <div class="control" v-for="item in controlsHelp.keysData">
+                            <div class="key" v-if="item.key == 'fizquierda'"><i class="fa-solid fa-left-long"></i></div>
+                            <div class="key" v-else-if="item.key == 'fderecha'"><i class="fa-solid fa-right-long"></i></div>
+                            <div class="key" v-else-if="item.key == 'farriba'"><i class="fa-solid fa-up-long"></i></div>
+                            <div class="key" v-else-if="item.key == 'fabajo'"><i class="fa-solid fa-down-long"></i></div>
+                            <div class="key" v-else-if="item.key == 'borrar'"><i class="fa-solid fa-delete-left"></i></div>
+                            <div class="key" v-else-if="item.key == 'enter'"><i class="fa-solid fa-right-to-bracket"></i></div>
+                            <div class="mouse" v-else-if="item.key == 'wheel'"><img src="./img/mouse.png"></div>
+                            <div class="mouse" v-else-if="item.key == 'rclick'"><img src="./img/right-click.png"></div>
+                            <div class="mouse" v-else-if="item.key == 'lclick'"><img src="./img/left-click.png"></div>
+                            <div class="key" v-else>{{item.key}}</div>
+                            <div class="desc">{{item.text}}</div>
+                        </div>
+                    </div>
+                </div>
+            </transition>
+
+            <transition name="fade_right">
+                <div class="houses" v-if="menu.houses.visible">
+                    <div class="title w-100">{{translations.houses}}</div>
+
+                    <template v-if="menu.houses.list && Object.keys(menu.houses.list).length > 0">
+                        <div class="list">
+                            <div 
+                                class="house" 
+                                v-for="house in menu.houses.list"
+                                :class="house.locked ? 'locked' : ''"
+                            >
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <i class="fa-solid fa-house"></i>
+                                    <div class="info">
+                                        <span class="name">{{house.name}}</span>
+                                        <span>{{house.location}}</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center gap-2">
+                                    <div class="btn-action" @click="markPosition(house.id, $event)">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div class="btn-action" @click="loadHouse(house.id, $event)" v-if="!house.locked">
+                                        <i class="fa-solid fa-house-chimney-window"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template v-else>
+                        <div class="no-houses">
+                            <img src="./img/no-houses.png" alt="">
+                            <span>{{translations.no_houses}}</span>
+                        </div>
+                    </template>
+                </div>
+            </transition>
+
+            <div id="gizmo"></div>
+        </div>
+    </body>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script type="module" crossorigin src="./js/gizmo.js"></script>
+    <script src="./js/script.js"></script>
+</html>

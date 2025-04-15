@@ -1,0 +1,1 @@
+ALTER TABLE `player_outfits` ADD `tags` VARCHAR(50) NULL DEFAULT 'No Tags' AFTER `outfitname`;

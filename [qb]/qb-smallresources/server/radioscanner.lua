@@ -1,0 +1,26 @@
+local QBCore = exports["qb-core"]:GetCoreObject()
+
+QBCore.Functions.CreateUseableItem("scanner", function(source, item)
+    local src = source
+    TriggerClientEvent("radio:scan", src)
+end)
+
+QBCore.Functions.CreateCallback("radio:RadiosInRange", function(source, cb, coords)
+    local players = QBCore.Functions.GetQBPlayers()
+    local channels = {}
+    for k, v in pairs(players) do
+        local pcoords = GetEntityCoords(GetPlayerPed(v.PlayerData.source))
+        local distance = #(coords - pcoords)
+        if distance <= 50.0 then
+            local state = Player(v.PlayerData.source).state
+            local channel = state["radioChannel"]
+            if channel ~= 0 then
+                channels[channel] = {
+                    min = (channel - 10), 
+                    max = (channel - 30)
+                }
+            end
+        end
+    end
+    cb(channels)
+end)

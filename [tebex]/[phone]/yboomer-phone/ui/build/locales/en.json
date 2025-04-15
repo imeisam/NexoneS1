@@ -1,0 +1,328 @@
+{
+	"metadata": {
+		"INFO": "This is not used in the phone.",
+		"VERSION": "1.0.0"
+	},
+	"general": {
+		"select": "Select",
+		"optionsShort": "Opt.",
+		"exit": "Exit",
+		"minutesLabel": "minutes",
+		"minuteLabel": "minute",
+		"noSim": "No SIM card inserted",
+		"emergencyCallsOnly": "Emergency calls only",
+		"deletedMessage": "Message deleted",
+		"noSignal": "No signal",
+		"unsuportedMedia": "Unsupported media"
+	},
+	"footerOptions": {
+		"select": "Select",
+		"options": "Opt.",
+		"exit": "Exit",
+		"back": "Back",
+		"save": "Save",
+		"clear": "Clear",
+		"search": "Search",
+		"call": "Call",
+		"cancel": "Cancel",
+		"answer": "Answer",
+		"decline": "Decline",
+		"mute": "Mute",
+		"unmute": "Unmute",
+		"end": "End",
+		"send": "Send",
+		"read": "Read",
+		"dismiss": "Dismiss",
+		"calculate": "Calculate",
+		"alerts": "Alerts",
+		"readAll": "Read All",
+		"scroll": "Scroll",
+		"chat": "Chat",
+		"unlock": "Unlock",
+		"copy": "Copy",
+		"goTo": "Go To",
+		"simEject": "Eject Sim",
+		"simInsert": "Insert Sim",
+		"preview": "Preview",
+		"clearAll": "Clear All",
+		"capture": "Capture",
+		"block": "Block",
+		"unblock": "Unblock",
+		"media": "Media",
+		"edit": "Edit"
+	},
+	"apps": {
+		"phone": {
+			"title": "Calls Log",
+			"missedCalls": "Missed calls",
+			"receivedCalls": "Received calls",
+			"dialedCalls": "Dialed calls",
+			"loading": "Loading...",
+			"noCalls": "No calls found"
+		},
+		"missedCalls": {
+			"title": "Missed Calls"
+		},
+		"receivedCalls": {
+			"title": "Received Calls"
+		},
+		"dialedCalls": {
+			"title": "Dialed Calls"
+		},
+		"messages": {
+			"title": "Messages",
+			"inbox": "Inbox",
+			"create": "Create Message",
+			"noConversations": "No conversations found"
+		},
+		"createMessage": {
+			"title": "New Message",
+			"to": "To:",
+			"numbers": "Numbers",
+			"message": "Message",
+			"receiverPlaceholder": "Select from Opt.",
+			"messagePlaceholder": "Type your message here...",
+			"abc": "abc",
+			"sendMessageError": "Failed to send message"
+		},
+		"messagesInbox": {
+			"title": "Inbox",
+			"noMessages": "No messages found",
+			"noContacts": "No contacts found",
+			"loading": "Loading...",
+			"photo": "Photo"
+		},
+		"chat": {
+			"placeholder": "Type a message...",
+			"copiedToClipboardLabel": "Message copied to clipboard",
+			"failedToDeleteMessage": "Failed to delete message"
+		},
+		"contacts": {
+			"title": "Contacts",
+			"names": "Names",
+			"search": "Search",
+			"addContact": "Add contact",
+			"blockedNumbers": "Blocked Numbers"
+		},
+		"contactsBook": {
+			"title": "Contact Book",
+			"noContacts": "No contacts found",
+			"endOfContacts": "End of contacts"
+		},
+		"contactsSearch": {
+			"title": "Search Contacts",
+			"name": "Name",
+			"abc": "abc",
+			"noContacts": "No contacts found",
+			"endOfContacts": "End of contacts",
+			"placeholder": "Search for a contact..."
+		},
+		"contactsCreate": {
+			"title": "Create Contact",
+			"name": "Name",
+			"abc": "abc",
+			"number": "Number",
+			"placeholder": "Enter a name...",
+			"numberPlaceholder": "Enter a number..."
+		},
+		"contactsEdit": {
+			"title": "Edit Contact",
+			"name": "Name",
+			"abc": "abc",
+			"number": "Number",
+			"namePlaceholder": "Enter a name...",
+			"numberPlaceholder": "Enter a number..."
+		},
+		"contactsSearchResult": {
+			"title": "Search",
+			"noContacts": "No contacts found"
+		},
+		"contactsBlocked": {
+			"title": "Blocked Numbers",
+			"noBlockedNumbers": "No blocked numbers found",
+			"endOfBlockedNumbers": "End of blocked numbers"
+		},
+		"calculator": {
+			"title": "Calculator",
+			"error": "Error",
+			"infinity": "Infinity"
+		},
+		"notifications": {
+			"title": "Notifications",
+			"noNotifications": "No notifications found"
+		},
+		"gallery": {
+			"title": "Gallery",
+			"noImages": "No images found",
+			"delete": "Delete",
+			"copyImageAddress": "Copy",
+			"imageAddressCopied": "Image copied to clipboard",
+			"photoSavedToGallery": "Photo saved to gallery",
+			"savingPhoto": "Saving photo..."
+		},
+		"settings": {
+			"title": "Settings",
+			"copy": "Phone Number",
+			"phone": "Phone settings",
+			"sound": "Sound settings",
+			"display": "Display settings",
+			"security": "Security settings",
+			"sim": "Sim settings",
+			"about": "About phone",
+			"numberCopiedToClipboard": "Number copied to clipboard",
+			"copiedToClipboard": "Copied to clipboard"
+		},
+		"phoneSettings": {
+			"title": "Phone Settings",
+			"streamerMode": "Streamer Mode",
+			"streamerModeOn": "On",
+			"streamerModeOff": "Off",
+			"airplaneMode": "Airplane Mode",
+			"airplaneModeOn": "On",
+			"airplaneModeOff": "Off",
+			"notifications": "Notifications",
+			"notificationsOn": "On",
+			"notificationsOff": "Off",
+			"hideCallerId": "Hide Caller ID",
+			"hideCallerIdOn": "On",
+			"hideCallerIdOff": "Off",
+			"language": "Language"
+		},
+		"soundSettings": {
+			"title": "Sound Settings",
+			"ringtone": "Ringtone",
+			"notification": "Notification Sound",
+			"volume": "Volume",
+			"soundMode": "Sound Mode"
+		},
+		"displaySettings": {
+			"title": "Display Settings",
+			"scaling": "Scaling",
+			"brightness": "Brightness",
+			"color": "Color",
+			"scale": "Scale",
+			"brightnessOn": "On",
+			"brightnessOff": "Off",
+			"wallpaper": "Wallpaper",
+			"wallpaperUrl": "Wallpaper URL"
+		},
+		"securitySettings": {
+			"title": "Security Settings",
+			"pin": "Pin",
+			"pinOn": "On",
+			"pinOff": "Off"
+		},
+		"aboutPhone": {
+			"title": "About Phone",
+			"version": "Version",
+			"build": "Build",
+			"language": "Language",
+			"os": "Operating System",
+			"phoneImei": "Phone IMEI",
+			"phoneNumber": "Phone Number",
+			"publisher": "Publisher"
+		},
+		"simSettings": {
+			"title": "Sim Settings",
+			"sim": "Sim",
+			"simNumber": "Sim Number",
+			"simEject": "Eject Sim",
+			"simEjectDisabled": "Sim eject disabled",
+			"activeSim": "Active Sim",
+			"noSim": "No Sim",
+			"cannotEjectSim": "Cannot eject",
+			"cannotInsertSim": "Please remove the sim in slot 1 first",
+			"simEjected": "Sim ejected",
+			"simInserted": "Sim inserted",
+			"simEjectFailed": "Failed to eject sim",
+			"simInsertFailed": "Failed to insert sim"
+		},
+		"hints": {
+			"title": "Hints",
+			"pressAllButtons": "Press all buttons to continue",
+			"pressEnter": "Press Any Button to continue",
+			"keyboardShortcutsExplain": "This phone supports keyboard shortcuts - use your keyboard to navigate!",
+			"up": "Up",
+			"down": "Down",
+			"left": "Left",
+			"right": "Right",
+			"enter": "Enter",
+			"select": "Select",
+			"backspace": "Backspace",
+			"options": "Options",
+			"rightShift": "Right Shift",
+			"back": "Back"
+		}
+	},
+	"modals": {
+		"optionsList": {
+			"title": "Options",
+			"copy": "Copy",
+			"delete": "Delete",
+			"timeStamp": "Timestamp",
+			"previewPhoto": "Preview Photo"
+		},
+		"messagesOptions": {
+			"title": "Select Contact",
+			"noContacts": "No contacts found"
+		},
+		"phoneOptions": {
+			"title": "Options",
+			"call": "Call",
+			"save": "Save",
+			"delete": "Delete",
+			"message": "Message",
+			"block": "Block",
+			"unblock": "Unblock",
+			"failedToDeleteContact": "Failed to delete contact",
+			"contactDeleted": "Contact deleted successfully",
+			"failedToBlockContact": "Failed to block contact",
+			"contactBlocked": "Blocked",
+			"contactUnblocked": "Unblocked"
+		},
+		"settingsOptions": {
+			"title": "Options"
+		},
+		"pinModal": {
+			"title": "Enter Pin",
+			"pinPlaceholder": "Enter your pin...",
+			"confirmTitle": "Confirm Pin",
+			"confirmPinPlaceholder": "Confirm your pin...",
+			"pinMismatch": "Pins do not match",
+			"pinCreationFailed": "Failed to create pin",
+			"removePin": "Remove Pin"
+		},
+		"wallpaperUrl": {
+			"title": "Wallpaper URL",
+			"urlPlaceholder": "Enter the wallpaper URL..."
+		},
+		"soundPreview": {
+			"title": "Sound Preview",
+			"noSounds": "No sounds found"
+		},
+		"imageChoose": {
+			"title": "Choose Image",
+			"chooseUrl": "Custom URL",
+			"chooseUrlPlaceholder": "Enter the image URL..."
+		}
+	},
+	"call": {
+		"title": "Call",
+		"unknownCaller": "Unknown",
+		"anonymous": "Private number",
+		"noService": "No service",
+		"alreadyInCall": "Already in call",
+		"cannotCallYourself": "Cannot call yourself",
+		"incomingCall": "Incoming call",
+		"outgoingCall": "Outgoing call",
+		"ongoingCall": "Ongoing call"
+	},
+	"lockScreen": {
+		"title": "Lock Screen",
+		"pin": "Pin",
+		"pinPlaceholder": "Enter your pin...",
+		"remainingAttempts": "Remaining attempts",
+		"autoLockTimeout": "Auto lock timeout",
+		"lockedFor": "Locked for"
+	}
+}

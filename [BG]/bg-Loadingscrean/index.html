@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Nexone</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas class="background" id="background"></canvas>
+
+    <div class="container">
+      <div class="header">
+        <div class="logo-container">
+          <img src="https://i.ibb.co/b5GLj0wg/Logo.png" alt="Nexone Logo" />
+        </div>
+        <h1 class="animated-text">
+          <span class="text-part">Welcome</span>
+          <span class="text-part">to</span>
+          <span class="text-part">Nexone</span>
+        </h1>
+        <div class="loading-bar">
+          <div class="progress"></div>
+        </div>
+      </div>
+
+      <div class="server-info">
+        <div class="time-wrapper">
+          <div class="time-display">
+            <i class="fas fa-clock"></i>
+            <span id="time" class="time-text">00:00:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="music-player">
+        <div class="music-info">
+          <h2 class="song-title">Loading...</h2>
+          <p class="artist">Please wait</p>
+        </div>
+
+        <div class="visualizer-container">
+          <canvas id="visualizer"></canvas>
+        </div>
+
+        <div class="controls">
+          <button id="prev"><i class="fas fa-backward"></i></button>
+          <button id="play"><i class="fas fa-play"></i></button>
+          <button id="next"><i class="fas fa-forward"></i></button>
+        </div>
+
+        <div class="volume-control">
+          <i class="fas fa-volume-up"></i>
+          <input type="range" id="volume" min="0" max="100" value="50" />
+          <span class="volume-level">50%</span>
+        </div>
+
+        <div class="progress-container">
+          <div class="music-progress"></div>
+        </div>
+      </div>
+    </div>
+
+    <audio id="audio" autoplay></audio>
+    <script src="script.js"></script>
+  </body>
+</html>

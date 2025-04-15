@@ -1,0 +1,7 @@
+[
+  ["/rjoin [1-10]", "Join a Radio Channel"],
+  ["Talk on Radio", "CAPSLOCK"],
+  ["Change Proximity", "F11"],
+  ["/radiovol [1-100]", "Control the volume of voices on the radio"],
+  ["/callvol [1-100]", "Control the volume of voices on a phone call"]
+]

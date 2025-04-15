@@ -1,0 +1,68 @@
+.container {
+    max-height: 98%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+
+.box {
+    background-color: rgba(45,45,45,0.25);
+    border-radius: 6px;
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.productList {
+    position: relative;
+    flex: 3;
+    max-width: 500px;
+    overflow: auto;
+    height: calc(42vh);
+}
+
+.cartList {
+    position: relative;
+    flex: 1;
+    min-width: 240px;
+    margin-left: 10px;
+    justify-content: center;
+    text-align: center;
+}
+
+.card {
+    display: flex;
+    background: radial-gradient(circle, rgba(129, 131, 138, 0.35) 0%, rgba(63, 65, 74, 0.45) 90%);
+    width: 100%;
+    border-radius: 6px;
+    max-width: 410px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.image {
+    width: 40px;
+    height: 40px;
+}
+
+.name {
+    margin-top: 10px;
+    width: 150px;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

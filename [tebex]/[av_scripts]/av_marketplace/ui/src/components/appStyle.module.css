@@ -1,0 +1,13 @@
+.app {
+  position: absolute;
+  background-color: #1b1d29;
+  width: calc(100%);
+  height: calc(100%);
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  height: 90%;
+}

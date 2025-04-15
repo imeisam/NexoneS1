@@ -1,0 +1,220 @@
+currentJob = nil
+jobBlips = {}
+jobObjects = {}
+jobSelectionBoards = {}
+
+--- Method to create a job task blip with given coords, label, sprite and creates a second radius blip if isRadius is true
+--- @param coords vector3 - blip coordinates
+--- @param label string - Text string to label the blip
+--- @param sprite number - The sprite number for the blip
+--- @param isRadius boolean - Whether to create a secondary radius blip
+--- @return nil
+createJobTaskBlip = function(coords, label, sprite, isRadius)
+    local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
+    SetBlipSprite(blip, sprite)
+    SetBlipDisplay(blip, 2)
+    SetBlipScale(blip, 0.8)
+    SetBlipAsShortRange(blip, true)
+    SetBlipColour(blip, 18)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentSubstringPlayerName("Job Task: " .. label)
+    EndTextCommandSetBlipName(blip)
+    jobBlips[#jobBlips + 1] = blip
+
+    if isRadius then
+        local blip2 = AddBlipForRadius(coords, 10.0)
+        SetBlipHighDetail(blip2, true)
+        SetBlipAlpha(blip2, 150)
+        SetBlipColour(blip2, 18)
+        jobBlips[#jobBlips + 1] = blip2
+    end
+end
+
+--- Method to iterate through all jobBlips and deletes them if they still exist, sets jobBlips to empty array
+--- @return nil
+destroyJobBlips = function()
+    for i=1, #jobBlips do
+        if DoesBlipExist(jobBlips[i]) then
+            RemoveBlip(jobBlips[i])
+        end
+    end
+    jobBlips = {}
+end
+
+--- Method to check all objects and deletes it if it is attached to the player's ped and has the given model hash
+--- @param hash number - object hash
+--- @return nil
+RemovePropType = function(hash)
+    local objects = GetGamePool('CObject')
+    local ped = PlayerPedId()
+    for _, object in pairs(objects) do
+        if IsEntityAttachedToEntity(ped, object) and GetEntityModel(object) == hash then
+            SetEntityAsMissionEntity(object, true, true)
+            DeleteObject(object)
+            DeleteEntity(object)
+            return
+        end
+    end
+end
+
+CreateThread(function()
+   
+
+
+    local pedmodel = GetHashKey('s_m_m_prisguard_01')
+    local coords = {
+        vector4(1741.14, 2520.93, 45.55, 303.79), -- cells
+    }
+
+    RequestModel(pedmodel)
+    while not HasModelLoaded(pedmodel) do
+        Wait(1)
+    end
+
+        for i=1, #coords do
+    
+    npc= CreatePed(4, pedmodel,coords[i].x,coords[i].y,coords[i].z-1, false, false)
+    SetEntityInvincible(npc, true)
+    SetBlockingOfNonTemporaryEvents(npc, true)
+    TaskStartScenarioInPlace(npc, 'WORLD_HUMAN_CLIPBOARD', 0, true)
+    SetEntityHeading(npc,coords[i].w)
+    FreezeEntityPosition(npc, true)
+    SetModelAsNoLongerNeeded(pedmodel)
+            jobSelectionBoards[#jobSelectionBoards + 1] = npc
+
+            exports['qb-target']:AddTargetEntity(npc, {
+                options = {
+                    {
+                        type = "client",
+                        event = "qb-jail:client:SelectJobMenu",
+                        icon = "fas fa-group-arrows-rotate",
+                        label = "Choose Job",
+                        canInteract = function()
+                            return PlayerData.metadata.injail ~= 0
+                        end
+                    },
+                },
+                distance = 3.0
+            })
+        end
+       
+	
+end)
+
+RegisterNetEvent('qb-jail:client:SelectJobMenu', function()
+    QBCore.Functions.TriggerCallback('qb-jail:server:GetGroupData', function(result)
+        local menu = {
+            {
+                header = "Prison Jobs",
+                txt = "ESC or click to close",
+                icon = 'fas fa-angle-left',
+                params = {
+                    event = "qb-menu:closeMenu",
+                }
+            },
+        }
+        for k, v in ipairs(result) do
+            if v.job ~= currentJob then
+                menu[#menu+1] = {
+                    header = 'Group ' .. k .. ' - ' .. v.label,
+                    txt = 'Inmates in group: ' .. v.amount,
+                    icon = 'fas fa-circle-chevron-right',
+                    params = {
+                        event = "qb-jail:client:ChangeJob",
+                        args = v.job
+                    }
+                }
+            else
+                menu[#menu+1] = {
+                    header = 'Group ' .. k .. ' - ' .. v.label .. ' (Current)',
+                    txt = 'Inmates in group: ' .. v.amount,
+                    icon = 'fas fa-circle-xmark',
+                    isMenuHeader = true,
+                }
+            end
+        end
+        exports['qb-menu']:openMenu(menu)
+    end)
+end)
+
+RegisterNetEvent('qb-jail:client:ChangeJob', function(selectedJob)
+    currentJob = selectedJob
+    TriggerServerEvent('qb-jail:server:ChangeJob', selectedJob)
+
+    -- Clear Current job objects
+    for i=1, #jobObjects do DeleteEntity(jobObjects[i]) end
+
+    -- Clear Current job blips
+    destroyJobBlips()
+
+    -- Clear Current PolyZone
+    if currentZone then 
+        currentZone:destroy()
+        currentZone = nil
+    end
+
+    if selectedJob == 'running' then
+        startRunningJob()
+        exports["nxo-oui"]:Show('Task', 'Current Task: Running - Progress: 0%')
+      
+        Wait(4000)
+        -- exports["nxo-oui"]:Close()
+    elseif selectedJob == 'workout' then
+        QBCore.Functions.Notify('Make your way to the yard to work out!', 'primary', 2500)
+        createJobTaskBlip(vector3(1776.9791259766, 2497.1469726562, 45.823505401611), 'Workout', 311, true)
+        -- createJobTaskBlip(vector3(1643.02, 2530.02, 45.56), 'Workout', 311, true)
+        -- createJobTaskBlip(vector3(1747.63, 2482.18, 45.74), 'Workout', 311, true)
+        exports["nxo-oui"]:Show('Task', 'Current Task: Workout')
+        Wait(4000)
+        -- exports["nxo-oui"]:Close()
+    elseif selectedJob == 'kitchen' then
+        QBCore.Functions.TriggerCallback('qb-jail:server:GetCurrentKitchenTask', function(label, progress)
+            if label and progress then
+                QBCore.Functions.Notify('Make your way to the cafetaria for work!', 'primary', 2500)
+                createJobTaskBlip(vector3(1783.57, 2552.57, 45.67), 'Kitchen', 436, true)
+                exports["nxo-oui"]:Show('Task', 'Current Task: ' .. label .. ' - Progress: ' .. progress .. '%')
+                Wait(4000)
+                -- exports["nxo-oui"]:Close()
+            end
+        end)
+    elseif selectedJob == 'cleaning' then
+        QBCore.Functions.TriggerCallback('qb-jail:server:GetActiveCleaningTasks', function(result)
+            for i=1, #result do
+                createJobTaskBlip(result[i], 'Cleaning Cells', 456, false)
+            end
+            QBCore.Functions.Notify('Make your way to the cells for work!', 'primary', 2500)
+            exports["nxo-oui"]:Show('Task', 'Current Task: Cleaning Cells - Progress: ' .. math.floor(100 * (Config.CleaningTaskAmount - #result) / Config.CleaningTaskAmount) .. '%')
+            Wait(4000)
+            -- exports["nxo-oui"]:Close()
+        end)
+    elseif selectedJob == 'scrapyard' then
+        createJobTaskBlip(vector3(1653.66, 2513.7, 45.56), 'Scrapyard', 728, true)
+        QBCore.Functions.Notify('Make your way to the cells for work!', 'primary', 2500)
+        exports["nxo-oui"]:Show('Task', 'Current Task: Scrapyard')
+        -- Wait(4000)
+        --  exports["nxo-oui"]:Close()
+    elseif selectedJob == 'electrical' then
+        QBCore.Functions.TriggerCallback('qb-jail:server:GetActiveElectricalTasks', function(result)
+            for i=1, #result do
+                createJobTaskBlip(Config.Electrical[result[i]].coords.xyz, 'Electrical', 354, false)
+            end
+            QBCore.Functions.Notify('Go and fix the electrical boxes!', 'primary', 2500)
+            exports["nxo-oui"]:Show('Task', 'Current Task: Electrical - Progress: ' .. math.floor(100 * (#Config.Electrical - #result) / #Config.Electrical) .. '%')
+            Wait(4000)
+            -- exports["nxo-oui"]:Close()
+        end)
+    elseif selectedJob == 'lockup' then
+        createJobTaskBlip(vector3(1768.65, 2490.387, 45.56), 'Lockup', 730, true)
+        exports["nxo-oui"]:Show('Task', 'Current Task: Lockup - Stay in the cell block')
+        Wait(4000)
+        -- exports["nxo-oui"]:Close()
+    elseif selectedJob == 'gardening' then
+        for k, v in pairs(Config.gardenprop) do
+            createJobTaskBlip(v.coord, 'Gardening', 162, true)
+        end
+        QBCore.Functions.Notify('You are tasked to tend to the garden!', 'primary', 2500)
+        exports["nxo-oui"]:Show('Task', 'Current Task: Gardening')
+        Wait(4000)
+        -- exports["nxo-oui"]:Close()
+    end
+end)

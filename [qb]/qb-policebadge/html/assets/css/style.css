@@ -1,0 +1,80 @@
+@font-face {
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: none;
+  font-family: "Courier New", Courier, monospace;
+}
+
+body, html {
+  width: 70%;
+  height: 70%;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+  color: #9e9e9e00;
+}
+
+#photolink {
+  max-width: 25%;
+  max-height: 34%;
+  width: 25%;
+  margin: 8.5% 13.5%;
+  height: 34%;
+}
+
+#badge {
+  position: relative;
+  display: none;
+  margin: 22% 133.3%;
+  /* left: 10vh; */
+  width: 62%;
+  height: 86%;
+  /* padding: 54px 17px 10px 144px; */
+}
+
+img {
+  position: absolute;
+  left:2px;
+  top:5px;
+}
+
+#name {
+  font-weight: bolder;
+  /* font-size: 140%; */
+  /* font-style: normal; */
+  font-variant: small-caps;
+  text-transform: none; 
+  text-align: center;
+  color: #000000;
+}
+
+#inline {
+  position: relative;
+  top: 63%;
+  left: -24%;
+  font-size: 2vh;
+
+}
+
+#grade {
+  font-weight: bolder;
+  /* font-size: 120%; */
+  /* font-style: normal; */
+  font-variant: small-caps;
+  text-transform: none; 
+  text-align: center;
+  color: #000000;
+}
+
+#callsign {
+  font-weight: bolder;
+  /* font-size: 120%; */
+  /* font-style: normal; */
+  font-variant: small-caps;
+  text-transform: none; 
+  text-align: center;
+  color: #000000;
+}

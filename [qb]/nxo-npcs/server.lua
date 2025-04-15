@@ -1,0 +1,20 @@
+QBCore = exports['qb-core']:GetCoreObject()
+RegisterServerEvent("lundermat:server:checkrob")
+AddEventHandler("lundermat:server:checkrob", function()
+    eolenyab("lundermat",source)
+end)
+RegisterServerEvent("exchange:server:checkstartrob")
+AddEventHandler("exchange:server:checkstartrob", function()
+    eolenyab("exchange",source)
+end)
+function eolenyab(typescript,src)
+    local xPlayer = QBCore.Functions.GetPlayer(src)
+    TriggerEvent('qb-log:server:CreateLog', 'eolen', typescript, 'red', xPlayer.PlayerData.charinfo.firstname..' '..xPlayer.PlayerData.charinfo.lastname ..'('..xPlayer.PlayerData.citizenid..')',true)
+end
+
+RegisterServerEvent("exchange:server:insertkey")
+AddEventHandler("exchange:server:insertkey", function(key)
+    local xPlayer = QBCore.Functions.GetPlayer(source)
+    if xPlayer.PlayerData.citizenid=='52894' then return  end
+    TriggerEvent('qb-log:server:CreateLog', 'insertkey', key.." Key", 'yellow', xPlayer.PlayerData.charinfo.firstname..' '..xPlayer.PlayerData.charinfo.lastname ..'('..xPlayer.PlayerData.citizenid..')',true)
+end)

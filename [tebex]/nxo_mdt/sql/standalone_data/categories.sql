@@ -1,0 +1,16 @@
+INSERT INTO `drx_mdt_categories` (`id`, `label`, `description`, `color`) VALUES
+	(1, 'Traffic Violations', 'Offenses related to the violation of traffic rules and regulations, such as speeding, reckless driving, or DUI.', '#008000'),
+	(2, 'Property Damage', 'Crimes involving the destruction or damaging of another persons property without their consent.', '#FFA500'),
+	(3, 'Assault', 'Offenses involving physical harm or threat of harm to others, including battery and domestic violence.', '#FF0000'),
+	(4, 'Robbery', 'Crimes involving the use of force or threat to unlawfully take property or valuables from another person.', '#800080'),
+	(5, 'Drug Related', 'Offenses associated with the illegal possession, sale, or distribution of controlled substances.', '#FFFF00'),
+	(6, 'White Collar Crimes', 'Non-violent crimes committed by individuals or organizations in business settings, such as fraud, embezzlement, or insider trading.', '#00FFFF'),
+	(7, 'Firearms', 'Offenses related to the illegal possession, use, or sale of firearms.', '#000080'),
+	(8, 'Public Order Crimes', 'Crimes that violate public order or decency, including public intoxication, disorderly conduct, or disturbing the peace.', '#FFC0CB'),
+	(9, 'Sexual Crimes', 'Offenses of a sexual nature, such as sexual assault, rape, or sexual harassment.', '#FF69B4'),
+	(10, 'Homicide', 'Crimes involving the killing of another person, intentionally or unintentionally. This includes murder and manslaughter.', '#8B0000'),
+	(11, 'Theft and Burglary', 'Crimes involving the unlawful taking of another persons property without use of force or threat.', '#673AB7'),
+	(12, 'Cybercrime', 'Offenses involving computers or digital networks, such as hacking, identity theft, or online harassment.', '#00BCD4'),
+	(13, 'Kidnapping', 'Crimes involving the illegal capturing and detention of an individual against their will.', '#795548'),
+	(14, 'Arson', 'Offenses involving the intentional setting of fires to cause damage or harm.', '#9E9E9E'),
+	(15, 'Organized Crime', 'Crimes committed by structured groups typically involving activities like drug trafficking, gambling, or racketeering.', '#607D8B');

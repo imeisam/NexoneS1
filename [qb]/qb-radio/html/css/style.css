@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Micro+5&display=swap');
+@import url('https://fonts.cdnfonts.com/css/alarm-clock');
+
+body {
+    position: relative;
+    font-family: sans-serif;
+    overflow: hidden;
+    top: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+  height: 109vh;
+  display:none;
+}
+
+.radio-container {
+  position: absolute;
+  bottom: -56vh;
+  right: 4vh;
+}
+
+.radio {
+  width: 37vh;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+#submit {
+  cursor: pointer;
+  position: absolute;
+  width:4vh;
+  height: 3.0vh;
+  bottom: 9vh;
+  left:7.0vh;
+  border-radius: 5px;
+  transition: all 0.1s linear;
+}
+
+#submit:hover {
+  cursor: pointer;
+  /* background: rgba(255, 255, 255, 0.178); */
+}
+
+#disconnect {
+  cursor: pointer;
+  position: absolute;
+  width: 3.5vh;
+  height: 2.0vh;
+  bottom: 5.3vh;
+  right: 18.0vh;
+  border-radius: 5px;
+  transition: all 0.1s linear;
+}
+
+#disconnect:hover {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.13);
+}
+
+#volumeUp {
+  cursor: pointer;
+  position: absolute;
+  width: 3.5vh;
+  height: 2vh;
+  bottom: 7vh;
+  right: 7vh;
+  border-radius: 5px;
+  transition: all 0.1s linear;
+}
+
+#volumeUp:hover {
+  cursor: pointer;
+  /* background: rgba(255, 255, 255, 0.13); */
+}
+
+#volumeDown {
+  cursor: pointer;
+  position: absolute;
+  width: 3.5vh;
+  height: 2vh;
+  bottom: 7vh;
+  right: 12vh;
+  border-radius: 5px;
+  
+  transition: all 0.1s linear;
+}
+
+#volumeDown:hover {
+  cursor: pointer;
+  /* background: rgba(255, 255, 255, 0.13); */
+}
+
+#increaseradiochannel {
+  cursor: pointer;
+  position: absolute;
+  width: 0.2vh;
+  height: 3vh;
+  bottom: 9.7vh;
+  border: none;
+  outline: none;
+  box-shadow: rgba(133, 120, 5, 0.377) 12px 13px 8px,
+  #616082 1.5px 1.5px 2px 0px inset, #e6b001 -3.2px -3.2px 8px 0px inset;
+  background-color: #aa7d02;
+  left: 1.3vh;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  transition: all 0.1s linear;
+}
+
+
+#increaseradiochannel:disabled,
+#decreaseradiochannel:disabled {
+  cursor: default !important;
+}
+
+#decreaseradiochannel {
+  cursor: pointer;
+  position: absolute;
+  width: 0.2vh;
+  background-color: #aa7d02;
+  height: 3vh;
+  bottom: 5.3vh;
+  border: none;
+  outline: none;
+  background-color: #aa7d02;
+  left: 1.3vh;
+  box-shadow: rgba(133, 120, 5, 0.377) 12px 13px 8px,
+  #616082 1.5px 1.5px 2px 0px inset, #e6b001 -3.2px -3.2px 8px 0px inset;
+  background-color: #aa7d02;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  transition: all 0.1s linear;
+}
+
+
+#poweredOff {
+  cursor: pointer;
+  position: absolute;
+  width:  5vh;
+  height: 3.5vh;
+  bottom: 8.4vh;
+  left: 6.5vh;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: all 0.1s linear;
+}
+
+#poweredOff:hover {
+  cursor: pointer;
+  /* background: rgba(255, 255, 255, 0.13); */
+}
+
+.onoff button {
+  padding: 40px 55px;
+  opacity: .0;
+}
+
+.channel {
+  position: absolute;
+  bottom: 17.9vh;
+  left: 11.5vh;
+  background: none;
+}
+
+::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.channel span {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.568);
+}
+
+.channel input {
+  text-align: center;
+  border: none;
+  font-size: 25px;
+  background: none;
+  outline: none;
+  color: rgba(0, 0, 0, 0.568);
+  font-family: 'alarm clock';
+  width: 5.7vw;
+  margin-left: -10px;
+}
+
+.mhz  {
+  position: absolute;
+  bottom: 18.5vh;
+  left: 20.5vh;
+  background: none;
+  font-family: 'alarm clock';
+  color: rgba(0, 0, 0, 0.568);
+}
+
+::-webkit-inner-spin-button {
+  display: none;
+}
+
+.button1 {
+  width: 5.7em;
+  height: 5.7em;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: #0080ff;
+  box-shadow: rgba(0, 0, 0, 0.377) 12px 13px 8px,
+    #616082 1.5px 1.5px 2px 0px inset, #003870 -3.2px -3.2px 8px 0px inset;
+  cursor: pointer;
+  font-family: Montserrat;
+  transition: 0.1s ease-in-out;
+}
+.button2 {
+  width: 5.7em;
+  height: 5.7em;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: #0080ff;
+  box-shadow: rgba(0, 0, 0, 0.377) 12px 13px 8px,
+    #616082 1.5px 1.5px 2px 0px inset, #003870 -3.2px -3.2px 8px 0px inset;
+  cursor: pointer;
+  font-family: Montserrat;
+  transition: 0.1s ease-in-out;
+}
+
+.button1:disabled,
+.button2:disabled {
+  cursor: default !important;
+}
+/* Additional styles for active state */
+.button1:active:enabled,
+.button2:active:enabled {
+  box-shadow: rgba(0, 0, 0, 0.377) 0px 0px 0px, inset 0.5px 0.5px 4px #000000,
+    #1f1f2e -3.2px -3.2px 8px 0px inset;
+}
+/* Additional styles for active state */
+ .deactive{
+  background-color: #515253 !important;
+}
+
+
+
+
+
+.button1 i,
+.button2 i {
+  color: white !important; /* Change icon color to white */
+}
+
+.power-button {
+  width: 7em; /* Increased width */
+  height: 7em; /* Increased height */
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: red; /* Initial color (will be overridden by JavaScript) */
+  box-shadow: rgba(0, 0, 0, 0.377) 12px 13px 8px,
+    #616082 1.5px 1.5px 2px 0px inset, #242424 -3.2px -3.2px 8px 0px inset;
+  cursor: pointer;
+  font-family: Montserrat;
+  transition: 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; /* Text color */
+  font-size: 1.5em; /* Adjust font size as needed */
+  user-select: none
+}
+
+
+.power-button.on {
+  background-color: rgb(76, 170, 76);
+}
+
+.power-button.off {
+  background-color: rgb(139, 139, 139);
+}
+
+.power-button .text {
+  font-size: 0.8em; /* Adjust the font size as needed */
+  padding: 0.5em; /* Adjust the padding as needed */
+  user-select: none
+}
+

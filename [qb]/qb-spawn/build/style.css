@@ -1,0 +1,83 @@
+.map-parent {
+  box-shadow: 11px 10px 117px 51px hsla(348, 83%, 47%, 0.75) inset;
+  -webkit-box-shadow: 11px 10px 117px 51px hsla(348, 83%, 47%, 0.75) inset;
+  -moz-box-shadow: 11px 10px 117px 51px hsla(348, 83%, 47%, 0.75) inset;
+}
+.body {
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+  font-family: "Poppins";
+}
+
+.header-border {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.363);
+  border-left: 120px solid transparent;
+  border-right: 120px solid transparent;
+}
+
+/* === removing defa.loc-item-parentt button style ===*/
+.button {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+/* button styling */
+.button {
+  --border-right: 5px;
+  --text-stroke-color: #ffffff;
+  --animation-color: #dc143c;
+  --fs-size: 1.5vw;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.button:hover .hover-text {
+  width: 100%;
+
+  filter: drop-shadow(0 0 15px var(--animation-color));
+}
+
+/* tippy js css  */
+.tippy-box[data-theme~="tomato"] {
+  background: rgb(220, 20, 60);
+  background: linear-gradient(
+    120deg,
+    rgba(220, 20, 60, 1) 0%,
+    rgba(102, 18, 35, 1) 100%
+  );
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding: 2px 4px;
+  font-size: 0.8vw;
+  font-weight: 400;
+  text-transform: capitalize;
+  font-family: "Poppins" !important;
+}
+
+.tippy-box[data-theme~="tomato"] .tippy-arrow {
+  color: rgb(156, 15, 43);
+}

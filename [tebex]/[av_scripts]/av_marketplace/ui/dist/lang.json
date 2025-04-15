@@ -1,0 +1,21 @@
+{
+  "header": "Marketplace",
+  "createAd": "Create Ad",
+  "search": "Search...",
+  "title": "Create Ad",
+  "adTitle": "Title",
+  "category": "Category",
+  "price": "Price",
+  "phone": "Phone",
+  "image": "Image",
+  "expires": "Expires In",
+  "description": "Description",
+  "button": "Create",
+  "1day": "1 Day",
+  "3day": "3 Days",
+  "5day": "5 Days",
+  "7day": "7 Days",
+  "deleteAd": "Delete Ad",
+  "contactButton": "Contact Seller",
+  "hover": "Hover to reveal"
+}
